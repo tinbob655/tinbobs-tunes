@@ -81,6 +81,16 @@ div {
         margin-top: $marginTopBottom;
         margin-bottom: $marginTopBottom;
     }
+
+    &#footerWrapper {
+        width: 100vw;
+    }
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .noVerticalSpacing {
