@@ -26,7 +26,9 @@ h3 {
     color: #20d15a;
     font-weight: 900;
     font-size: 23px;
+    
     cursor: pointer;
+    text-decoration: underline;
 
     transition-property: transform;
     transition-duration: 0.75s;
@@ -53,12 +55,12 @@ h1, h2, h3, p {
 
     &.alignLeft {
         margin-left: 5%;
-        max-width: 66%;
+        max-width: 80%;
     }
 
     &.alignRight {
         margin-right: 5%;
-        max-width: 66%;
+        max-width: 80%;
     }
 }
 
