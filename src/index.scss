@@ -82,6 +82,23 @@ div {
         margin-bottom: $marginTopBottom;
     }
 
+    &#headerWrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 99;
+        width: 66%;
+
+        transform: translateX(-80%);
+        transition-property: transform;
+        transition-duration: 0.75s;
+        transition-timing-function: ease;
+
+        &.active {
+            transform: translateX(0);
+        }
+    }
+
     &#footerWrapper {
         width: 100vw;
     }
@@ -91,6 +108,11 @@ img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;;
 }
 
 .noVerticalSpacing {
