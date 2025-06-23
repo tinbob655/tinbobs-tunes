@@ -5,6 +5,8 @@ export default function Footer():React.ReactElement {
 
     return (
         <React.Fragment>
+            <div className="dividerLine"></div>
+            
             <div id="footerWrapper">
                 <img src={logoImage} alt="NewRinaldi Logo" style={{width: 'auto', height: '25vh'}} />
 
