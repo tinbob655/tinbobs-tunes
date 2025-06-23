@@ -1,0 +1,91 @@
+//import google fonts
+@import url('https://fonts.googleapis.com/css2?family=Bellota+Text:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+body {
+    background-color: rgb(8, 8, 10);
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-family: Mulish;
+    color: white;
+    font-weight: 800;
+    font-size: 43px;
+}
+
+h2 {
+    font-family: Mulish;
+    color: silver;
+    font-weight: 650;
+    font-size: 25px;
+}
+
+h3 {
+    font-family: Bellota Text;
+    color: #20d15a;
+    font-weight: 900;
+    font-size: 23px;
+    cursor: pointer;
+
+    transition-property: transform;
+    transition-duration: 0.75s;
+    transition-timing-function: ease;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+p {
+    font-family: Bellota Text;
+    color: rgb(180, 218, 171);
+    font-weight: 400;
+    font-size: 17px;
+}
+
+h1, h2, h3, p {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    max-width: 75%;
+
+    &.alignLeft {
+        margin-left: 5%;
+        max-width: 66%;
+    }
+
+    &.alignRight {
+        margin-right: 5%;
+        max-width: 66%;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+div {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+
+    &.dividerLine {
+        height: 5px;
+        background-color: #51c276;
+        width: 75%;
+        $marginTopBottom: 20px;
+        margin-top: $marginTopBottom;
+        margin-bottom: $marginTopBottom;
+    }
+}
+
+.noVerticalSpacing {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
