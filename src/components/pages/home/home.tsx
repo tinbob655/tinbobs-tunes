@@ -23,7 +23,7 @@ export default function Home():React.ReactElement {
                 The Music
             </h2>
             <p className="alignLeft">
-                The majority of my music is released as signles however I have created a few albums over the years as well. My albums usually feature a collection of tracks which use similar / the same instruments and so have a similar feel to them. My singles range from fast paced electronic to pirate themed sea shanties.
+                The majority of my music is released as singles however I have created a few albums over the years as well. My albums usually feature a collection of tracks which use similar / the same instruments and so have a similar feel to them. My singles range from fast paced electronic to pirate themed sea shanties.
             </p>
             <table style={{width: '80%'}}>
                 <thead>
