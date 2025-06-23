@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Divide as Hamburger} from 'hamburger-react';
 import { Link } from 'react-router-dom';
+import './scss/header.scss';
 
 export default function Header():React.ReactElement {
 

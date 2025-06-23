@@ -1,0 +1,16 @@
+div#headerWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    width: 66%;
+
+    transform: translateX(-80%);
+    transition-property: transform;
+    transition-duration: 0.75s;
+    transition-timing-function: ease;
+
+    &.active {
+        transform: translateX(0);
+    }
+}
