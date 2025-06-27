@@ -1,0 +1,126 @@
+{
+    "animalFarmAlbum": {
+        "frontendName": "Animal Farm (V1)",
+        "releaseDate": "28/10/22",
+        "tracks": [
+            ["onAnimalFarm.mp3", "On Animal Farm"],
+            ["theWindmillSong.mp3", "The Windmill Song"],
+            ["getOffOurLand.mp3", "Get off our Land"],
+            ["beastsOfEngland.mp3", "Beasts of England"],
+            ["theSevenCommandments.mp3", "The 7 Commandments"],
+            ["boxersDemise.mp3", "Boxer's Demise"],
+            ["sugarCandyMountain.mp3", "Sugar Candy Mountain"],
+            ["whyMustICarryTheWorldOnMyShoulders.mp3", "Why Must I Carry the World on My Shoulders"]
+        ]
+    },
+    "animalFarmV2Album": {
+        "frontendName": "Animal Farm (V2)",
+        "releaseDate": "26/02/23",
+        "tracks": [
+            ["onAnimalFarmV2.mp3", "On Animal Farm V2"],
+            ["theSevenCommandments.MP3", "The 7 Commandments V2"],
+            ["theWindmillSong.MP3", "The Windmill Song V2"],
+            ["napoleonsNewRegime.MP3", "Napoleon's New Regime"],
+            ["theBattleOfTheCowshed.MP3", "The Battle of the Cowshed"]
+        ]  
+    },
+    "bigJungleInnitAlbum": {
+        "frontendName": "Big Jungle Innit",
+        "releaseDate": "16/01/23",
+        "tracks": [
+            ["westernAdventures.mp3", "Green Pastures"],
+            ["onwardsAndUpwards", "Onwards and Upwards"],
+            ["springtime.mp3", "Springtime"],
+            ["summerSun.mp3", "Summer Sun"],
+            ["theLostCity.mp3", "The Lost City"],
+            ["upInTheSky.mp3", "Up in the Sky"],
+            ["sanctuaryInTheGlades.mp3", "Sanctuary in the Glades"]
+        ]
+    },
+    "buccaneersAlbum": {
+        "frontendName": "Buccaneers",
+        "releaseDate": "01/01/2024",
+        "tracks": [
+            ["manTheCannons.flac", "Man the Cannons"],
+            ["landHo.flac", "Land Ho"],
+            ["theMutinousHelmsmanV2.flac", "The Mutinous Helmsman V2"],
+            ["theHungeringOne.flac", "The Hungering One"],
+            ["cursedGold.flac", "Cursed Gold"],
+            ["ghostPirates.flac", "Ghost Pirates"],
+            ["rum.flac", "Rum!"]
+        ]
+    },
+    "coldChristmasCrunkersAlbum": {
+        "frontendName": "Cold Christmas Crunkers",
+        "releaseDate": "01/12/23",
+        "tracks": [
+            ["christmasPast.mp3", "Christmas Past"],
+            ["christmasPresent.mp3", "Christmas Present"],
+            ["christmasFuture.mp3", "Christmas Future"],
+            ["comeFlyWithMeChristmasSpecial.mp3", "Come Fly With Me Christmas Special"]
+        ]
+    },
+    "hugeGuitarAlbum": {
+        "frontendName": "Huge Guitar",
+        "releaseDate": "04/07/23",
+        "tracks": [
+            ["theIronDuke.flac", "The Iron Duke"],
+            ["warDrums.flac", "War Drums"],
+            ["mrCoffee.flac", "Mr. Coffee"],
+            ["counterstrike.flac", "Counterstrike"],
+            ["doNotResist.flac", "Do Not Resist"],
+            ["forwardsComrades.flac", "Forward, Comrades"],
+            ["readyAimFire.flac", "Ready, Aim, Fire"]
+        ]
+    },
+    "pipeDownAlbum": {
+        "frontendName": "Pipe Down",
+        "releaseDate": "11/04/23",
+        "tracks": [
+            ["takeoff.flac", "Takeoff"],
+            ["cutItOut.flac", "Cut it Out"],
+            ["thatsCompleteLies.flac", "That's Complete Lies"],
+            ["literallyNo.flac", "Literally No"],
+            ["dontWantTheChat.flac", "Don't Want the Chat"],
+            ["iveHadItWithTheCrap.flac", "I've Had it With the Crap"],
+            ["electromanAdventuresAcoustic.flac", "Electroman Adventures (Acoustic vers)"]
+        ]
+    },
+    "pipeDownRemasteredAlbum": {
+        "frontendName": "Pipe Down Remastered",
+        "releaseDate": "01/05/2023",
+        "tracks": [
+            ["takeoffRemastered.flac", "Takeoff Remastered"],
+            ["cutItOutRemastered.flac", "Cut it Out Remastered"]
+        ]
+    },
+    "scareETunesAlbum": {
+        "frontendName": "Scare-e Tunes",
+        "releaseDate": "12/11/22",
+        "tracks": [
+            ["alwaysWatching.mp3", "Always Watching"],
+            ["imGoingToTakeAwayTheSignificantMajorityOfYourRights.mp3", "I'm Going to Take Away the Significant Majority of Your Rights"],
+            ["plzHelpMeIveCausedIntegralDamageToMyAnkle.mp3", "Please Help Me I've Caused Integral Damage to My Ankle"],
+            ["spookyClownPersonThingDudeManGuy.mp3", "Spooky Clown Person Thing Dude Man Guy"],
+            ["temporaryIntermission.mp3", "Temporary Intermission"],
+            ["theLastStand.mp3", "The Last Stand"],
+            ["youResembleATwitchingLobsterInManyWays.mp3"]
+        ]
+    },
+    "weaselPoppersAlbum": {
+        "frontendName": "Weasel Poppers",
+        "releaseDate": "15/10/22",
+        "tracks": [
+            ["twitchingAround.mp3", "Twitching Around"],
+            ["8bitHavinAFit.mp3", "8-Bit Havin' A Fit"],
+            ["skiddaddle.mp3", "Skiddaddle"],
+            ["upDownAllAround.mp3", "Up, Down, All Around"],
+            ["mustGoFasta.mp3", "Must Go Fasta'"],
+            ["hometime.mp3", "Hometime"],
+            ["aNewDawn.mp3", "A New Dawn"],
+            ["battleOfTitans.mp3"],
+            ["speedyMcGeedie.mp3", "Speedy McGeedie"],
+            ["huntingSomeBounty.mp3", "Hunting Some Bounty"]
+        ]
+    }
+}
