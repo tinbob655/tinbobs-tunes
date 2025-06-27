@@ -39,7 +39,7 @@
     },
     "buccaneersAlbum": {
         "frontendName": "Buccaneers",
-        "releaseDate": "01/01/2024",
+        "releaseDate": "01/01/24",
         "tracks": [
             ["manTheCannons.flac", "Man the Cannons"],
             ["landHo.flac", "Land Ho"],
@@ -88,7 +88,7 @@
     },
     "pipeDownRemasteredAlbum": {
         "frontendName": "Pipe Down Remastered",
-        "releaseDate": "01/05/2023",
+        "releaseDate": "01/05/23",
         "tracks": [
             ["takeoffRemastered.flac", "Takeoff Remastered"],
             ["cutItOutRemastered.flac", "Cut it Out Remastered"]
