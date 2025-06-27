@@ -1,6 +1,6 @@
 import React from 'react';
-import logoImage from './assets/images/NR logo.png';
-import './scss/footer.scss';
+import logoImage from '../../assets/images/NR logo.png';
+import '../../scss/footer.scss';
 
 export default function Footer():React.ReactElement {
 

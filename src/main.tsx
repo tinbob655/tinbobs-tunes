@@ -4,8 +4,8 @@ import './scss/index.scss';
 import './scss/text.scss';
 import AppRoutes from './routes';
 import { BrowserRouter } from 'react-router-dom';
-import Header from './header';
-import Footer from './footer';
+import Header from './components/multiPageComponents/header';
+import Footer from './components/multiPageComponents/footer';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
