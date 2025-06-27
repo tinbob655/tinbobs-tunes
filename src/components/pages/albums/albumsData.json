@@ -1,42 +1,4 @@
 {
-    "animalFarmAlbum": {
-        "frontendName": "Animal Farm (V1)",
-        "releaseDate": "28/10/22",
-        "tracks": [
-            ["onAnimalFarm.mp3", "On Animal Farm"],
-            ["theWindmillSong.mp3", "The Windmill Song"],
-            ["getOffOurLand.mp3", "Get off our Land"],
-            ["beastsOfEngland.mp3", "Beasts of England"],
-            ["theSevenCommandments.mp3", "The 7 Commandments"],
-            ["boxersDemise.mp3", "Boxer's Demise"],
-            ["sugarCandyMountain.mp3", "Sugar Candy Mountain"],
-            ["whyMustICarryTheWorldOnMyShoulders.mp3", "Why Must I Carry the World on My Shoulders"]
-        ]
-    },
-    "animalFarmV2Album": {
-        "frontendName": "Animal Farm (V2)",
-        "releaseDate": "26/02/23",
-        "tracks": [
-            ["onAnimalFarmV2.mp3", "On Animal Farm V2"],
-            ["theSevenCommandments.MP3", "The 7 Commandments V2"],
-            ["theWindmillSong.MP3", "The Windmill Song V2"],
-            ["napoleonsNewRegime.MP3", "Napoleon's New Regime"],
-            ["theBattleOfTheCowshed.MP3", "The Battle of the Cowshed"]
-        ]  
-    },
-    "bigJungleInnitAlbum": {
-        "frontendName": "Big Jungle Innit",
-        "releaseDate": "16/01/23",
-        "tracks": [
-            ["westernAdventures.mp3", "Green Pastures"],
-            ["onwardsAndUpwards", "Onwards and Upwards"],
-            ["springtime.mp3", "Springtime"],
-            ["summerSun.mp3", "Summer Sun"],
-            ["theLostCity.mp3", "The Lost City"],
-            ["upInTheSky.mp3", "Up in the Sky"],
-            ["sanctuaryInTheGlades.mp3", "Sanctuary in the Glades"]
-        ]
-    },
     "buccaneersAlbum": {
         "frontendName": "Buccaneers",
         "releaseDate": "01/01/24",
@@ -73,6 +35,14 @@
             ["readyAimFire.flac", "Ready, Aim, Fire"]
         ]
     },
+    "pipeDownRemasteredAlbum": {
+        "frontendName": "Pipe Down Remastered",
+        "releaseDate": "01/05/23",
+        "tracks": [
+            ["takeoffRemastered.flac", "Takeoff Remastered"],
+            ["cutItOutRemastered.flac", "Cut it Out Remastered"]
+        ]
+    },
     "pipeDownAlbum": {
         "frontendName": "Pipe Down",
         "releaseDate": "11/04/23",
@@ -86,13 +56,29 @@
             ["electromanAdventuresAcoustic.flac", "Electroman Adventures (Acoustic vers)"]
         ]
     },
-    "pipeDownRemasteredAlbum": {
-        "frontendName": "Pipe Down Remastered",
-        "releaseDate": "01/05/23",
+    "bigJungleInnitAlbum": {
+        "frontendName": "Big Jungle Innit",
+        "releaseDate": "16/01/23",
         "tracks": [
-            ["takeoffRemastered.flac", "Takeoff Remastered"],
-            ["cutItOutRemastered.flac", "Cut it Out Remastered"]
+            ["westernAdventures.mp3", "Green Pastures"],
+            ["onwardsAndUpwards", "Onwards and Upwards"],
+            ["springtime.mp3", "Springtime"],
+            ["summerSun.mp3", "Summer Sun"],
+            ["theLostCity.mp3", "The Lost City"],
+            ["upInTheSky.mp3", "Up in the Sky"],
+            ["sanctuaryInTheGlades.mp3", "Sanctuary in the Glades"]
         ]
+    },
+    "animalFarmV2Album": {
+        "frontendName": "Animal Farm (V2)",
+        "releaseDate": "26/02/23",
+        "tracks": [
+            ["onAnimalFarmV2.mp3", "On Animal Farm V2"],
+            ["theSevenCommandments.MP3", "The 7 Commandments V2"],
+            ["theWindmillSong.MP3", "The Windmill Song V2"],
+            ["napoleonsNewRegime.MP3", "Napoleon's New Regime"],
+            ["theBattleOfTheCowshed.MP3", "The Battle of the Cowshed"]
+        ]  
     },
     "scareETunesAlbum": {
         "frontendName": "Scare-e Tunes",
@@ -105,6 +91,20 @@
             ["temporaryIntermission.mp3", "Temporary Intermission"],
             ["theLastStand.mp3", "The Last Stand"],
             ["youResembleATwitchingLobsterInManyWays.mp3"]
+        ]
+    },
+    "animalFarmAlbum": {
+        "frontendName": "Animal Farm (V1)",
+        "releaseDate": "28/10/22",
+        "tracks": [
+            ["onAnimalFarm.mp3", "On Animal Farm"],
+            ["theWindmillSong.mp3", "The Windmill Song"],
+            ["getOffOurLand.mp3", "Get off our Land"],
+            ["beastsOfEngland.mp3", "Beasts of England"],
+            ["theSevenCommandments.mp3", "The 7 Commandments"],
+            ["boxersDemise.mp3", "Boxer's Demise"],
+            ["sugarCandyMountain.mp3", "Sugar Candy Mountain"],
+            ["whyMustICarryTheWorldOnMyShoulders.mp3", "Why Must I Carry the World on My Shoulders"]
         ]
     },
     "weaselPoppersAlbum": {
