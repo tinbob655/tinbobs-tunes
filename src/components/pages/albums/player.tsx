@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import '../../scss/player.scss';
+import '../../../scss/player.scss';
 import { Line } from 'rc-progress';
 
 //all buttons required for player
-import playButton from '../../assets/images/buttons/play.svg';
-import pauseButton from '../../assets/images/buttons/pause.svg';
-import rewindButton from '../../assets/images/buttons/rewind.svg';
-import repeatOneOffButton from '../../assets/images/buttons/repeatOneOff.svg';
-import repeatOneOnButton from '../../assets/images/buttons/repeatOneOn.svg';
-import stopButton from '../../assets/images/buttons/stop.svg';
-import type Album from '../pages/albums/album';
-import secondsToMinutesAndSeconds from '../../functions/secondsToMinuitesAndSeconds';
+import playButton from '../../../assets/images/buttons/play.svg';
+import pauseButton from '../../../assets/images/buttons/pause.svg';
+import rewindButton from '../../../assets/images/buttons/rewind.svg';
+import repeatOneOffButton from '../../../assets/images/buttons/repeatOneOff.svg';
+import repeatOneOnButton from '../../../assets/images/buttons/repeatOneOn.svg';
+import stopButton from '../../../assets/images/buttons/stop.svg';
+import type Album from './album';
+import secondsToMinutesAndSeconds from '../../../functions/secondsToMinuitesAndSeconds';
 
 interface params {
     audioName: string,
@@ -138,7 +138,7 @@ export default function Player({trackName, audioName, albumData}:params):React.R
                             <td style={{width: '25%'}}>
 
                                 {/*progress bar*/}
-                                <Line percent={(((elapsedTime[0] * 60) + elapsedTime[1]) / ((maxTime[0] * 60) + maxTime[1])) * 100} strokeColor={'#51c276'} strokeWidth={5} trailColor='#333333' trailWidth={2} gapPosition={'top'} />
+                                <Line percent={(((elapsedTime[0] * 60) + elapsedTime[1]) / ((maxTime[0] * 60) + maxTime[1])) * 100} strokeColor={'#51c276'} strokeWidth={12} trailColor='#333333' trailWidth={7} gapPosition={'top'} />
                             </td>
                             <td>
 

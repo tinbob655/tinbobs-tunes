@@ -2,7 +2,7 @@ import React from 'react';
 import PageHeader from '../../multiPageComponents/pageHeader';
 import Album from './album.ts';
 import * as albumsData from './albumsData.json' assert {type: 'json'};
-import Player from '../../multiPageComponents/player.tsx';
+import Player from './player.tsx';
 
 export default function Albums():React.ReactElement {
 
