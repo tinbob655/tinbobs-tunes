@@ -54,7 +54,7 @@ export default function Albums():React.ReactElement {
                 <React.Fragment>
 
                     {/*MARKUP FOR AN INDIVIDUAL TRACK PLAYER*/}
-                    <p>
+                    <p style={{marginBottom: 0, paddingBottom: 0}}>
                         {track[1]}
                     </p>
                     <Player trackName={track[1]} audioName={track[0]} albumData={albumObject} />
