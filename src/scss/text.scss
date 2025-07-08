@@ -20,6 +20,7 @@ h3 {
     color: #20d15a;
     font-weight: 900;
     font-size: 23px;
+    text-align: center !important;
     
     cursor: pointer;
     text-decoration: underline;
@@ -50,10 +51,12 @@ h1, h2, h3, p {
     &.alignLeft {
         margin-left: 5%;
         max-width: 80%;
+        text-align: left;
     }
 
     &.alignRight {
         margin-right: 5%;
         max-width: 80%;
+        text-align: right;
     }
 }

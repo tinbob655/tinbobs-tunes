@@ -2,6 +2,7 @@ body {
     background-color: rgb(8, 8, 10);
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
 }
 
 a {
@@ -29,6 +30,17 @@ img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding: 0;
+    width: fit-content;
+    max-width: 100%;
 }
 
 table {

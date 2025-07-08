@@ -31,7 +31,7 @@
             ["mrCoffee.flac", "Mr. Coffee"],
             ["counterstrike.flac", "Counterstrike"],
             ["doNotResist.flac", "Do Not Resist"],
-            ["forwardsComrades.flac", "Forward, Comrades"],
+            ["forwardComrades.flac", "Forward, Comrades"],
             ["readyAimFire.flac", "Ready, Aim, Fire"]
         ]
     },
@@ -113,12 +113,12 @@
         "tracks": [
             ["twitchingAround.mp3", "Twitching Around"],
             ["8bitHavinAFit.mp3", "8-Bit Havin' A Fit"],
-            ["skiddaddle.mp3", "Skiddaddle"],
+            ["skidaddle.mp3", "Skiddaddle"],
             ["upDownAllAround.mp3", "Up, Down, All Around"],
             ["mustGoFasta.mp3", "Must Go Fasta'"],
             ["hometime.mp3", "Hometime"],
             ["aNewDawn.mp3", "A New Dawn"],
-            ["battleOfTitans.mp3"],
+            ["battleOfTitans.mp3", "Battle of Titans"],
             ["speedyMcGeedie.mp3", "Speedy McGeedie"],
             ["huntingSomeBounty.mp3", "Hunting Some Bounty"]
         ]
