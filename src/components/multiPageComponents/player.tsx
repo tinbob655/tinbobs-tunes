@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import '../../scss/player.scss';
+import { Line } from 'rc-progress';
 
 //all buttons required for player
 import playButton from '../../assets/images/buttons/play.svg';
@@ -137,7 +138,7 @@ export default function Player({trackName, audioName, albumData}:params):React.R
                             <td style={{width: '25%'}}>
 
                                 {/*progress bar*/}
-                                <progress max={(maxTime[0] * 60) + maxTime[1]} value={(elapsedTime[0] * 60) + elapsedTime[1]} />
+                                <Line percent={(((elapsedTime[0] * 60) + elapsedTime[1]) / ((maxTime[0] * 60) + maxTime[1])) * 100} strokeColor={'#51c276'} strokeWidth={5} trailColor='#333333' trailWidth={2} gapPosition={'top'} />
                             </td>
                             <td>
 
