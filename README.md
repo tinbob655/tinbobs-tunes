@@ -16,7 +16,6 @@ A sleek, minimalist Android music player app built using **Vite + React**, and p
 - [React](https://reactjs.org/) - UI framework
 - [Capacitor](https://capacitorjs.com/) - Cross-platform native runtime
 - [TypeScript](https://www.typescriptlang.org/)  - for type safety and modern JS features
-- [Howler.js](https://howlerjs.com/) - for robust audio handling
 
 ## 📱 Getting Started
 
