@@ -1,12 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PageHeader from '../../multiPageComponents/pageHeader';
 import Album from './album.ts';
 import * as albumsData from './albumsData.json' assert {type: 'json'};
 import Player from './player.tsx';
 
 export default function Albums():React.ReactElement {
-
-    const [playingWholeAlbum, setPlayingWholeAlbum] = useState<boolean>(false);
 
     //iterates for every album
     function getAlbumsHTML(albumsData:any):React.ReactElement[] {
