@@ -3,7 +3,6 @@ import PageHeader from '../../multiPageComponents/pageHeader';
 import Album from './album.ts';
 import * as albumsData from './albumsData.json' assert {type: 'json'};
 import Player from './player.tsx';
-import playButtonImage from '../../../assets/images/buttons/play.svg';
 
 export default function Albums():React.ReactElement {
 
@@ -74,31 +73,6 @@ export default function Albums():React.ReactElement {
         });
 
         return tempTracksHTML;
-    };
-
-    function playEntireAlbum(album:Album):void {
-
-        //work out the first track of the album in question
-        const firstTrack:string = album.tracks[0][1];
-        const audio:HTMLAudioElement = document.getElementById(firstTrack) as HTMLAudioElement;
-
-        //make sure that the audio player was found
-        if (!audio) {
-            throw new Error(`Could not find an audio player with id ${firstTrack} for the ${album.frontendName} album`);
-        };
-
-        if (playingWholeAlbum) {
-
-            //need to pause the playing of the whole album
-            audio.pause();
-            setPlayingWholeAlbum(false);
-        }
-        else {
-
-            //need to start playing the whole album
-            audio.play();
-            setPlayingWholeAlbum(true);
-        };
     };
 
     return (
