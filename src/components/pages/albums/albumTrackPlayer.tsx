@@ -18,7 +18,7 @@ interface params {
     albumData: Album,
 };
 
-export default function Player({trackName, audioName, albumData}:params):React.ReactElement {
+export default function AlbumTrackPlayer({trackName, audioName, albumData}:params):React.ReactElement {
 
     const [playing, setPlaying] = useState<boolean>(false);
     const [elapsedTime, setElapsedTime] = useState<[number, number]>([0, 0]);
