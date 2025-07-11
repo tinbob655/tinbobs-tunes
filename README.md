@@ -36,20 +36,12 @@ cd tinbobs-tunes
 # 2. Install dependencies
 npm install
 
-# 3. Run the development server
+# 3. Run the development server (optional)
 npm run dev
 
-# 4. Build the app
-npm run build
-
-# 5. Initialize Capacitor (only the first time)
-npx cap init tinbobs.tunes com.tinbobs.tunes
-
-# 6. Add Android platform
+# 4. Set up capacitor (first time only)
 npx cap add android
+npx capacitor-assets generate
 
-# 7. Copy web assets to Android
-npx cap copy
-
-# 8. Open in Android Studio
-npx cap open android
+# 5. Build the app
+npm run build
