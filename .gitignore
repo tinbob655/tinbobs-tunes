@@ -12,6 +12,7 @@ dist
 android
 dist-ssr
 *.local
+*.apk
 
 # Editor directories and files
 .vscode/*
