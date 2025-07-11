@@ -23,15 +23,14 @@ export default function SingleTrackPlayer({track}:params):React.ReactElement {
     const [repeatingOne, setRepeatingOne] = useState<boolean>(false);
 
     useEffect(() => {
-        const audio:HTMLAudioElement = document.getElementById(track.frontendName) as HTMLAudioElement
+        const audio:HTMLAudioElement = document.getElementById(track.frontendName) as HTMLAudioElement;
+        audio.volume = 0.2;
+        setMaxTime(secondsToMinutesAndSeconds(audio.duration))
+        audio.addEventListener('ended', stopPlayback);
 
         //will fire once the audio has loaded the metadata (not the audio source)
         audio.onloadedmetadata = () => {
-
-            //set the volume of the audio lower to avoid deafening users
             audio.volume = 0.2;
-
-            //we can now obtain the length of the track 
             setMaxTime(secondsToMinutesAndSeconds(audio.duration));
 
             //also deal with the audio finishing

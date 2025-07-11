@@ -26,27 +26,27 @@ export default function AlbumTrackPlayer({trackName, audioName, albumData}:param
     const [repeatingOne, setRepeatingOne] = useState<boolean>(false);
 
     useEffect(() => {
-
-        const audio = document.getElementById(trackName) as HTMLAudioElement;
-        if (audio) {
+        const audio:HTMLAudioElement = document.getElementById(trackName) as HTMLAudioElement;
+        audio.volume = 0.2;
+        setMaxTime(secondsToMinutesAndSeconds(audio.duration));
+        audio.addEventListener('ended', stopPlayback);
     
-            //will fire when the audio metadata is ready
-            audio.onloadedmetadata = () => {
-                audio.volume = 0.2;
-    
-                //set the length of the track
-                setMaxTime(secondsToMinutesAndSeconds(audio.duration));
-            };
+        //will fire when the audio metadata is ready
+        audio.onloadedmetadata = () => {
+            audio.volume = 0.2;
 
-            //create a function to keep the elapsed time up to date
-            audio.ontimeupdate = function() {
+            //set the length of the track
+            setMaxTime(secondsToMinutesAndSeconds(audio.duration));
+        };
 
-                //update the elapsed time
-                setElapsedTime(secondsToMinutesAndSeconds(audio.currentTime));
+        //create a function to keep the elapsed time up to date
+        audio.ontimeupdate = function() {
 
-                //when the audio finishes, either stop or repeat it
-                audio.addEventListener('ended', stopPlayback);
-            };
+            //update the elapsed time
+            setElapsedTime(secondsToMinutesAndSeconds(audio.currentTime));
+
+            //when the audio finishes, either stop or repeat it
+            audio.addEventListener('ended', stopPlayback);
         };
     }, []);
 
