@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {Divide as Hamburger} from 'hamburger-react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../../scss/header.scss';
 
 export default function Header():React.ReactElement {
 
     const [hamburgerOpen, setHamburgerOpen] = useState<boolean>(false);
+    const navigator = useNavigate();
 
     useEffect(() => {
 
@@ -35,7 +36,15 @@ export default function Header():React.ReactElement {
         paths.forEach((path:page) => {
             tempHeaderLinks.push(
                 <React.Fragment>
-                    <Link to={path[0]}>
+                    <button type="button" onClick={() => {
+                        navigator(path[0]);
+
+                        //close hamburger after a link was pressed
+                        setHamburgerOpen(false);
+
+                        //make the page scroll to the top when a link was pressed
+                        window.scrollTo(0, 0);
+                    }}>
                         <h3 className="headerLink" style={{whiteSpace: 'pre-wrap'}}>
                             <br/>
                             <br/>
@@ -43,7 +52,7 @@ export default function Header():React.ReactElement {
                             <br/>
                             <br/>
                         </h3>
-                    </Link>
+                    </button>
                 </React.Fragment>
             );
         });
