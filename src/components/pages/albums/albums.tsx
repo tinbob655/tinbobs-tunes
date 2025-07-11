@@ -31,20 +31,32 @@ export default function Albums():React.ReactElement {
 
                     <div className="dividerLine"></div>
 
-                    {/*track title*/}
-                    <h2 className="alignLeft">
-                        {albumObject.frontendName}
-                    </h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td style={{width: '75%'}}>
+                                    {/*track title*/}
+                                    <h2 className="alignLeft">
+                                        {albumObject.frontendName}
+                                    </h2>
 
-                    {/*track release date*/}
-                    <p className="noVerticalSpacing alignLeft">
-                        Released on {albumObject.releaseDate.getDate()} / {albumObject.releaseDate.getMonth() +1} / {albumObject.releaseDate.getFullYear()}
-                    </p>
+                                    {/*track release date*/}
+                                    <p className="noVerticalSpacing alignLeft">
+                                        Released on {albumObject.releaseDate.getDate()} / {albumObject.releaseDate.getMonth() +1} / {albumObject.releaseDate.getFullYear()}
+                                    </p>
 
-                    {/* "tracks:" */}
-                    <p className="alignLeft" style={{marginLeft: '15%'}}>
-                        Tracks:
-                    </p>
+                                    {/* "tracks:" */}
+                                    <p className="alignLeft" style={{marginLeft: '15%'}}>
+                                        Tracks:
+                                    </p>
+                                </td>
+                                <td>
+                                    <img src={`/images/albumCovers/${albumObject.parentAlbum}.jpg`} className="artworkImage" />
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+
                     {getTracksHTML(albumObject)}
                 </React.Fragment>
             );

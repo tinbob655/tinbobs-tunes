@@ -30,6 +30,15 @@ img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+
+    &.artworkImage {
+        $width: 90%;
+        width: $width;
+        height: auto;
+        border-radius: 10px;
+        margin-left: unset;
+        margin-right: 100% - $width;
+    }
 }
 
 button {

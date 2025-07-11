@@ -16,16 +16,30 @@ export default function Singles():React.ReactElement {
         });
 
         singles.forEach((track:single) => {
+
+            //for every single, create a HTML section including a player
             tempSinglesHTML.push(
                 <React.Fragment>
                     <div className="dividerLine"></div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td style={{width: '75%'}}>
+                                    <h2 className="alignLeft" style={{marginTop: 0, paddingTop: 0}}>
+                                        {track.frontendName}
+                                    </h2>
+                                    <p className="alignLeft">
+                                        Released on {track.releaseDate.getDate()} / {track.releaseDate.getMonth()} / {track.releaseDate.getFullYear()}
+                                    </p>
+                                </td>
+                                <td>
+                                    <img src={`/images/singlesCovers/${track.artworkFileName}`} className="artworkImage" />
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
                     
-                    <h2 className="alignLeft">
-                        {track.frontendName}
-                    </h2>
-                    <p className="alignLeft">
-                        Released on {track.releaseDate.getDate()} / {track.releaseDate.getMonth()} / {track.releaseDate.getFullYear()}
-                    </p>
 
                     <SingleTrackPlayer track={track} />
                 </React.Fragment>
