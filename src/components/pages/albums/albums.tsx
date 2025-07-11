@@ -20,6 +20,23 @@ export default function Albums():React.ReactElement {
             };
         });
 
+        //need to sort the albums array from newest release date to oldest release date
+        albums.sort((a:Album, b:Album):number => {
+            const firstDate:Date = a.releaseDate;
+            const secondDate:Date = b.releaseDate;
+
+            if (firstDate > secondDate) {
+
+                //the first date is more recent than the second date
+                return -1;
+            }
+            else {
+
+                //the second date is more recent than the first date
+                return 1;
+            }
+        });
+
         //at this point, albums is an array of Album objects. Each Album object has a frontendName, a releaseDate and a 2D tracks array
         albums.forEach((albumObject) => {
 
@@ -94,6 +111,11 @@ export default function Albums():React.ReactElement {
             </h2>
             <p className="alignRight">
                 Usually the idea for an album for me comes from a song originally intended to be a single which I particularly like the feel of. I then create a series of other tracks using the same / similar instruments before a full album is completed with each song having a similar vibe.
+                <br/>
+                <br/>
+                <b>
+                    Albums are displayed from newest to oldest
+                </b>
             </p>
 
             {getAlbumsHTML(albumsData)}
