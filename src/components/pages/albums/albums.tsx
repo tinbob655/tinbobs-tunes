@@ -2,7 +2,7 @@ import React from 'react';
 import PageHeader from '../../multiPageComponents/pageHeader';
 import Album from './album.ts';
 import * as albumsData from './albumsData.json' assert {type: 'json'};
-import AlbumTrackPlayer from './albumTrackPlayer.tsx';
+import Player from '../../multiPageComponents/player.tsx';
 
 export default function Albums():React.ReactElement {
 
@@ -94,7 +94,8 @@ export default function Albums():React.ReactElement {
                     <p style={{marginBottom: 0, paddingBottom: 0}}>
                         {track[1]}
                     </p>
-                    <AlbumTrackPlayer trackName={track[1]} audioName={track[0]} albumData={albumObject} />
+                    
+                    <Player audioFileName={track[0]} trackName={track[1]} albumName={albumObject.parentAlbum} />
                 </React.Fragment>
             );
         });

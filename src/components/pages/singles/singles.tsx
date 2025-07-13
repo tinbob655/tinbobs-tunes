@@ -2,7 +2,7 @@ import React from 'react';
 import PageHeader from '../../multiPageComponents/pageHeader';
 import singlesData from './singlesData.json';
 import single from './single';
-import SingleTrackPlayer from './singleTrackPlayer';
+import Player from '../../multiPageComponents/player';
 
 export default function Singles():React.ReactElement {
 
@@ -56,9 +56,8 @@ export default function Singles():React.ReactElement {
                             </tr>
                         </thead>
                     </table>
-                    
 
-                    <SingleTrackPlayer track={track} />
+                    <Player audioFileName={track.audioFileName} trackName={track.frontendName} />
                 </React.Fragment>
             );
         });

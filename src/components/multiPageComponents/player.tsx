@@ -1,24 +1,23 @@
 import React, {useState, useEffect} from 'react';
-import '../../../scss/player.scss';
 import { Line } from 'rc-progress';
+import secondsToMinutesAndSeconds from '../../functions/secondsToMinuitesAndSeconds';
+import '../../scss/player.scss';
 
-//all buttons required for player
-import playButton from '../../../assets/images/buttons/play.svg';
-import pauseButton from '../../../assets/images/buttons/pause.svg';
-import rewindButton from '../../../assets/images/buttons/rewind.svg';
-import repeatOneOffButton from '../../../assets/images/buttons/repeatOneOff.svg';
-import repeatOneOnButton from '../../../assets/images/buttons/repeatOneOn.svg';
-import stopButton from '../../../assets/images/buttons/stop.svg';
-import type Album from './album';
-import secondsToMinutesAndSeconds from '../../../functions/secondsToMinuitesAndSeconds';
+//import all button images
+import playButton from '../../assets/images/buttons/play.svg';
+import pauseButton from '../../assets/images/buttons/pause.svg';
+import stopButton from '../../assets/images/buttons/stop.svg';
+import rewindButton from '../../assets/images/buttons/rewind.svg';
+import repeatOneOnButton from '../../assets/images/buttons/repeatOneOn.svg';
+import repeatOneOffButton from '../../assets/images/buttons/repeatOneOff.svg';
 
 interface params {
-    audioName: string,
-    trackName: string,
-    albumData: Album,
+    audioFileName:string;
+    trackName:string;
+    albumName?:string
 };
 
-export default function AlbumTrackPlayer({trackName, audioName, albumData}:params):React.ReactElement {
+export default function Player({audioFileName, trackName, albumName}:params):React.ReactElement {
 
     const [playing, setPlaying] = useState<boolean>(false);
     const [elapsedTime, setElapsedTime] = useState<[number, number]>([0, 0]);
@@ -26,74 +25,78 @@ export default function AlbumTrackPlayer({trackName, audioName, albumData}:param
     const [repeatingOne, setRepeatingOne] = useState<boolean>(false);
 
     useEffect(() => {
-        const audio:HTMLAudioElement = document.getElementById(trackName) as HTMLAudioElement;
+        const audio = getAudioElement();
         audio.volume = 0.2;
         setMaxTime(secondsToMinutesAndSeconds(audio.duration));
+
+        //when the audio finishes, stop it
         audio.addEventListener('ended', stopPlayback);
-    
-        //will fire when the audio metadata is ready
+
         audio.onloadedmetadata = () => {
             audio.volume = 0.2;
-
-            //set the length of the track
             setMaxTime(secondsToMinutesAndSeconds(audio.duration));
+            audio.addEventListener('ended', stopPlayback);
         };
 
-        //create a function to keep the elapsed time up to date
         audio.ontimeupdate = function() {
-
-            //update the elapsed time
             setElapsedTime(secondsToMinutesAndSeconds(audio.currentTime));
-
-            //when the audio finishes, either stop or repeat it
-            audio.addEventListener('ended', stopPlayback);
         };
     }, []);
 
     useEffect(() => {
-        const audio = document.getElementById(trackName) as HTMLAudioElement;
-        if (audio) {
-            if (repeatingOne) {
-                audio.removeEventListener('ended', stopPlayback);
-                audio.addEventListener('ended', rewind);
-            }
-            else {
-                audio.removeEventListener('ended', rewind);
-                audio.addEventListener('ended', stopPlayback);
-            };
+        const audio = getAudioElement();
+        if (repeatingOne) {
+
+            //if we are repeating one then remove the stop event listener and add a rewind one
+            audio.removeEventListener('ended', stopPlayback);
+            audio.addEventListener('ended', rewind);
+        }
+        else {
+
+            //if we are not repeating one then remove the rewind event listener and add a stop one
+            audio.removeEventListener('ended', rewind);
+            audio.addEventListener('ended', stopPlayback);
         };
     }, [repeatingOne]);
 
+    function getAudioElement():HTMLAudioElement {
+        const audio:HTMLAudioElement = document.getElementById(trackName) as HTMLAudioElement;
+        if (audio) {
+            return audio
+        }
+        else throw new Error(`Could not locate audio element with the id: ${trackName}`);
+    };
+
     function togglePlayPause():void {
-        const audio = document.getElementById(trackName) as HTMLAudioElement;
+        const audio = getAudioElement();
         if (audio.paused) {
 
-            //the audio is paused, play it
+            //audio is paused, need to play it
             try {
                 audio.play();
                 setPlaying(true);
             }
             catch(error) {
                 setPlaying(false);
-                throw (error)
-            }
+                throw error;
+            };
         }
         else {
 
-            //the audio is playing, pause it
+            //audio is playing, need to pause it
             try {
                 audio.pause();
                 setPlaying(false);
             }
             catch(error) {
                 setPlaying(true);
-                throw (error)
+                throw error;
             };
         };
     };
 
     function stopPlayback():void {
-        const audio = document.getElementById(trackName) as HTMLAudioElement;
+        const audio = getAudioElement();
         audio.pause();
         audio.currentTime = 0;
         setElapsedTime([0, 0]);
@@ -101,11 +104,11 @@ export default function AlbumTrackPlayer({trackName, audioName, albumData}:param
     };
 
     function rewind():void {
-        const audio = document.getElementById(trackName) as HTMLAudioElement;
+        const audio = getAudioElement();
         audio.currentTime = 0;
-        setElapsedTime([0, 0]);
         audio.play();
         setPlaying(true);
+        setElapsedTime([0, 0]);
     };
 
     function toggleRepeatOne():void {
@@ -115,7 +118,7 @@ export default function AlbumTrackPlayer({trackName, audioName, albumData}:param
     return (
         <React.Fragment>
             <audio id={trackName} preload={"metadata"}>
-                <source src={`/audio/albums/${albumData.parentAlbum}/${audioName}`} />
+                <source src={`/audio/${albumName ? `albums/${albumName}` : 'singles'}/${audioFileName}`} />
             </audio>
             <div className="playerWrapper">
                 <table>
@@ -174,4 +177,4 @@ export default function AlbumTrackPlayer({trackName, audioName, albumData}:param
             </div>
         </React.Fragment>
     );
-};
+} ;
