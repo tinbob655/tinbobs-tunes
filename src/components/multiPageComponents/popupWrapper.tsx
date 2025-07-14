@@ -25,9 +25,9 @@ export default function PopupWrapper({closeFunc, children}:params):React.ReactEl
     return (
         <React.Fragment>
             <div className={popupClasses}>
-                <button type="button" onClick={() => {closePopup()}}>
-                    <h3>
-                        X
+                <button type="button" onClick={() => {closePopup()}} style={{width: '5%', float: 'right', marginRight: '10px'}}>
+                    <h3 style={{color: '#909090', textDecoration: 'none'}}>
+                        x
                     </h3>
                 </button>
                 {children}

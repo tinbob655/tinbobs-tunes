@@ -28,11 +28,11 @@ div {
     &.popupWrapper {
         position: fixed;
         width: 80vw;
-        height: 70vh;
+        height: 65vh;
         z-index: 70;
         background-color: #202020;
         border: #505050 5px solid;
-        top: 15vh;
+        top: 12.5vh;
         left: 10vw;
         border-radius: 20px;
 
@@ -76,6 +76,26 @@ button {
 table {
     width: 100%;
     table-layout: fixed;;
+}
+
+input {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    font-weight: 500;
+    font-family: Bellota Text;
+    color: rgb(180, 218, 171); 
+    background-color: #303030;
+    border: none;
+    width: 66%;
+    max-width: 66vw;
+    height: 20px;
+    border-radius: 7px;
+    ::placeholder {
+        color: rgb(180, 218, 171);
+        opacity: 1;
+    }
 }
 
 .noVerticalSpacing {
