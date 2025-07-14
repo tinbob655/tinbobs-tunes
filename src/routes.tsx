@@ -6,6 +6,7 @@ import Home from './components/pages/home/home';
 import Albums from './components/pages/albums/albums';
 import Playlists from './components/pages/playlists/playlists.tsx';
 import Singles from './components/pages/singles/singles';
+import Playlist from './components/pages/playlists/playlist.tsx';
 
 export default function AppRoutes():React.ReactElement {
 
@@ -21,6 +22,7 @@ export default function AppRoutes():React.ReactElement {
             ['/albums', <Albums/>],
             ['/playlists', <Playlists/>],
             ['/singles', <Singles/>],
+            ['/playlist', <Playlist/>],
         ];
 
         paths.forEach((path:pageArray) => {
