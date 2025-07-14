@@ -24,6 +24,27 @@ div {
         margin-top: $marginTopBottom;
         margin-bottom: $marginTopBottom;
     }
+
+    &.popupWrapper {
+        position: fixed;
+        width: 80vw;
+        height: 70vh;
+        z-index: 70;
+        background-color: #202020;
+        border: #505050 5px solid;
+        top: 15vh;
+        left: 10vw;
+        border-radius: 20px;
+
+        transition-property: transform;
+        transition-duration: 0.75s;
+        transition-timing-function: ease;
+        transform: scale(0);
+
+        &.shown {
+            transform: scale(1);
+        }
+    }
 }
 
 img {
