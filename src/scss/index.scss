@@ -35,6 +35,7 @@ div {
         top: 12.5vh;
         left: 10vw;
         border-radius: 20px;
+        overflow-y: scroll;
 
         transition-property: transform;
         transition-duration: 0.75s;
