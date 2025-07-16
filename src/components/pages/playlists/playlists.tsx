@@ -4,12 +4,7 @@ import { Link } from 'react-router-dom';
 import { playlistClass } from './playlistClass';
 import removeButton from '../../../assets/images/buttons/remove.svg';
 import savePlaylists from './savePlaylists';
-
-interface playlistData {
-    name: string,
-    tracks: string[],
-    description?:string,
-};
+import type {playlistData} from './playlistDataInterface';
 
 export default function Playlists():React.ReactElement {
 

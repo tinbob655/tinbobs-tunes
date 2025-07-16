@@ -1,10 +1,5 @@
-import type { playlistClass } from "../components/pages/playlists/playlistClass";
-
-interface playlistData {
-    name:string;
-    description?:string;
-    tracks:string[];
-};
+import type { playlistClass } from "./playlistClass";
+import type { playlistData } from "./playlistDataInterface";
 
 export default function savePlaylists(playlistArray:playlistClass[]):void {
     let tempPlaylists:playlistData[] = [];
