@@ -74,7 +74,7 @@ export default function Playlists():React.ReactElement {
 
         //create the new playlist and add it to the array of existing playlists
         let oldPlaylists = userPlaylists;
-        const newPlaylist = new playlistClass('New Playlist', '');
+        const newPlaylist = new playlistClass(`New Playlist #${Math.floor(Math.random() * 100)}`, '');
         oldPlaylists.push(newPlaylist);
 
         //update local storage with the new playlist
