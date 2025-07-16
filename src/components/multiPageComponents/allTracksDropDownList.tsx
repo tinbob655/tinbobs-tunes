@@ -1,6 +1,6 @@
 import React from 'react';
-import albumsData from '../albums/albumsData.json' assert {type: 'json'};
-import singlesData from '../singles/singlesData.json' assert {type: 'json'};
+import albumsData from '../pages/albums/albumsData.json' assert {type: 'json'};
+import singlesData from '../pages/singles/singlesData.json' assert {type: 'json'};
 
 export default function AllTracksDropDownList():React.ReactElement {
 
