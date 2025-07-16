@@ -16,6 +16,28 @@ input, select {
         color: rgb(180, 218, 171);
         opacity: 1;
     }
+
+    &.submit {
+        background-color: transparent;
+        width: fit-content;
+        border: none;
+        font-size: 20px;
+        font-weight: 700;
+        height: unset;
+        $marginTopBottom: 10px;
+        margin-top: $marginTopBottom;
+        margin-bottom: $marginTopBottom;
+        cursor: pointer;
+
+        transition-property: transform;
+        transform: scale(1);
+        transition-duration: 0.75s;
+        transition-timing-function: ease;
+
+        &:hover {
+            transform: scale(1.15);
+        }
+    }
 }
 
 p {
