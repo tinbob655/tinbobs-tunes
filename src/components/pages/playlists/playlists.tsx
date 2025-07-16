@@ -3,6 +3,7 @@ import PageHeader from '../../multiPageComponents/pageHeader';
 import { Link } from 'react-router-dom';
 import { playlistClass } from './playlistClass';
 import removeButton from '../../../assets/images/buttons/remove.svg';
+import savePlaylists from './savePlaylists';
 
 interface playlistData {
     name: string,
@@ -91,17 +92,7 @@ export default function Playlists():React.ReactElement {
         oldPlaylists.push(newPlaylist);
 
         //update local storage with the new playlist
-        let playlistsAsStrings:playlistData[] = [];
-        oldPlaylists.forEach((playlist) => {
-            playlistsAsStrings.push(
-                {
-                    name: playlist.name,
-                    description: playlist.description,
-                    tracks: playlist.tracks,
-                },
-            );
-        });
-        localStorage.setItem('playlists', JSON.stringify(playlistsAsStrings));
+        savePlaylists(oldPlaylists);
 
         //finally, update the frontend
         setUserPlaylists([...oldPlaylists]);
@@ -118,17 +109,7 @@ export default function Playlists():React.ReactElement {
         oldPlaylists.splice(deletionIndex, 1);
 
         //update local storage
-        let playlists:playlistData[] = [];
-        oldPlaylists.forEach((playlist) => {
-            playlists.push(
-                {
-                    name: playlist.name,
-                    description: playlist.description,
-                    tracks: playlist.tracks,
-                },
-            );
-        });
-        localStorage.setItem('playlists', JSON.stringify(playlists));
+        savePlaylists(oldPlaylists);
 
         //finally, update the frontend
         setUserPlaylists([...oldPlaylists]);
