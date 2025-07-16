@@ -1,81 +1,137 @@
 import React, {useEffect, useState} from 'react';
 import PageHeader from '../../multiPageComponents/pageHeader';
 import { Link } from 'react-router-dom';
+import { playlistClass } from './playlistClass';
+import removeButton from '../../../assets/images/buttons/remove.svg';
 
-interface playlist {
-    name:string;
-    description?:string;
-    tracks:[string, string][];
+interface playlistData {
+    name: string,
+    tracks: string[],
+    description?:string,
 };
-
-const testData:playlist[] = [
-    {
-        name: 'Test playlist',
-        tracks: [
-            [
-                'Cut it Out',
-                'cutItOut.flac'
-            ],
-            [
-                'Bloom',
-                'bloom.flac',
-            ],
-            
-        ],
-        description: 'A playlist to test the playlist system while in development',
-    },
-];
 
 export default function Playlists():React.ReactElement {
 
-    const [playlistHTML, setPlaylistHTML] = useState<React.ReactElement[]|React.ReactElement>([]);
+    const [userPlaylists, setUserPlaylists] = useState<playlistClass[]>([]);
+    const [playlistHTML, setPlaylistHTML] = useState<React.ReactElement[]>([]);
 
     useEffect(() => {
-        let userPlaylists:playlist[];
 
-        //gives the option to use test data rather than having to use localStorage during development
-        if (testData) {
-            userPlaylists = testData;
+        //when the page loads, fetch the user's playlists from localStorage
+        const storagePlaylists:playlistData[] = JSON.parse(localStorage.getItem('playlists') as string);
+        if (storagePlaylists && storagePlaylists.length >= 1) {
+
+            //use the localStorage playlists to generate an array of playlist classes
+            let tempPlaylists:playlistClass[] = [];
+            storagePlaylists.forEach((individualPlaylist:playlistData) => {
+                let newPlaylist:playlistClass = new playlistClass(individualPlaylist.name, individualPlaylist.description);
+                newPlaylist.tracks = individualPlaylist.tracks;
+                tempPlaylists.push(newPlaylist);
+            });
+
+            setUserPlaylists(tempPlaylists);
         }
-        else {
-            userPlaylists = JSON.parse(sessionStorage.getItem('playlists') as string);
-        };
+    }, [])
 
-        //if userPlaylists does not exist then the user must have no playlists
-        if (!userPlaylists || userPlaylists.length < 1) {
-            setPlaylistHTML(
-                <p>
-                    You haven't created any playlists yet!
-                </p>
-            );
-        }
-        else {
+    //keeps the playlists section up to date with 
+    useEffect(() => {
+        let tempPlaylistsHTML:React.ReactElement[] = [];
 
-            //the user has at least one playlist
-            let tempPlaylistHTML:React.ReactElement[] = [];
-            userPlaylists.forEach((singlePlaylist:playlist) => {
-                tempPlaylistHTML.push(
+        if (userPlaylists && userPlaylists.length >= 1) {
+
+            //the user has at least one playlist, generate markup for each playlist
+            userPlaylists.forEach((playlist) => {
+                tempPlaylistsHTML.push(
                     <React.Fragment>
-                        <Link to={'/playlist'} state={{tracks: singlePlaylist.tracks, name: singlePlaylist.name, description: singlePlaylist.description}}>
-                            <h2 className="alignLeft">
-                                {singlePlaylist.name}
-                            </h2>
-                            <p className="alignLeft">
-                                {singlePlaylist.description}
-                            </p>
-                        </Link>
-
-                        <div className="dividerLine"></div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td style={{width: '66%'}}>
+                                        <Link to='/playlist' state={{playlist: playlist.playlistToString()}} >
+                                            <h2 className="alignLeft">
+                                                {playlist.name}
+                                            </h2>
+                                            <p className="alignLeft" style={{marginBottom: '50px'}}>
+                                                {playlist.description}
+                                            </p>
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <button type="button" style={{padding: '20px'}} onClick={(() => {deletePlaylist(playlist)})}>
+                                            <img src={removeButton} className="playerButtonImage" />
+                                        </button>
+                                    </td>
+                                </tr>
+                            </thead>
+                        </table>
                     </React.Fragment>
                 );
             });
+        }
+        else {
 
-            setPlaylistHTML(tempPlaylistHTML);
+            //the user has not made a playlist, display this
+            tempPlaylistsHTML.push(
+                <React.Fragment>
+                    <h2 className="alignLeft">
+                        You haven't made any playlists yet!
+                    </h2>
+                </React.Fragment>
+            );
         };
-    }, []);
 
-    function createPlaylist():void {
-        console.log('Playlist create button clicked');
+        setPlaylistHTML(tempPlaylistsHTML);
+    }, [userPlaylists]);
+
+    function createNewPlaylist():void {
+
+        //create the new playlist and add it to the array of existing playlists
+        let oldPlaylists = userPlaylists;
+        const newPlaylist = new playlistClass('New Playlist', '');
+        oldPlaylists.push(newPlaylist);
+
+        //update local storage with the new playlist
+        let playlistsAsStrings:playlistData[] = [];
+        oldPlaylists.forEach((playlist) => {
+            playlistsAsStrings.push(
+                {
+                    name: playlist.name,
+                    description: playlist.description,
+                    tracks: playlist.tracks,
+                },
+            );
+        });
+        localStorage.setItem('playlists', JSON.stringify(playlistsAsStrings));
+
+        //finally, update the frontend
+        setUserPlaylists([...oldPlaylists]);
+    };
+
+    function deletePlaylist(playlistToDelete:playlistClass) {
+        let oldPlaylists = userPlaylists;
+
+        //first delete the element to delete
+        const deletionIndex:number = oldPlaylists.indexOf(playlistToDelete);
+        if (deletionIndex === -1) {
+            throw new Error('Playlist to delete was not a member of userPlaylists');
+        };
+        oldPlaylists.splice(deletionIndex, 1);
+
+        //update local storage
+        let playlists:playlistData[] = [];
+        oldPlaylists.forEach((playlist) => {
+            playlists.push(
+                {
+                    name: playlist.name,
+                    description: playlist.description,
+                    tracks: playlist.tracks,
+                },
+            );
+        });
+        localStorage.setItem('playlists', JSON.stringify(playlists));
+
+        //finally, update the frontend
+        setUserPlaylists([...oldPlaylists]);
     };
 
     return (
@@ -93,9 +149,11 @@ export default function Playlists():React.ReactElement {
 
             {playlistHTML}
 
-            <button onClick={() => {createPlaylist()}} type="button">
+            <div className="dividerLine"></div>
+
+            <button onClick={() => {createNewPlaylist()}} type="button">
                 <h3>
-                    Create a playlist +
+                    Create new playlist +
                 </h3>
             </button>
         </React.Fragment>
