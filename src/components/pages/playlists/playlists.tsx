@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { playlistClass } from './playlistClass';
 import removeButton from '../../../assets/images/buttons/remove.svg';
 import savePlaylists from './savePlaylists';
-import type {playlistData} from './playlistDataInterface';
+import getLocalStoragePlaylists from './getLocalStoragePlaylists';
 
 export default function Playlists():React.ReactElement {
 
@@ -14,19 +14,10 @@ export default function Playlists():React.ReactElement {
     useEffect(() => {
 
         //when the page loads, fetch the user's playlists from localStorage
-        const storagePlaylists:playlistData[] = JSON.parse(localStorage.getItem('playlists') as string);
-        if (storagePlaylists && storagePlaylists.length >= 1) {
-
-            //use the localStorage playlists to generate an array of playlist classes
-            let tempPlaylists:playlistClass[] = [];
-            storagePlaylists.forEach((individualPlaylist:playlistData) => {
-                let newPlaylist:playlistClass = new playlistClass(individualPlaylist.name, individualPlaylist.description);
-                newPlaylist.tracks = individualPlaylist.tracks;
-                tempPlaylists.push(newPlaylist);
-            });
-
-            setUserPlaylists(tempPlaylists);
-        }
+        const playlists = getLocalStoragePlaylists();
+        if (playlists && playlists.length > 0) {
+            setUserPlaylists(playlists);
+        };
     }, [])
 
     //keeps the playlists section up to date with 
