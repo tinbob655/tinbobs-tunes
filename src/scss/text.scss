@@ -32,6 +32,15 @@ h3 {
     &:hover {
         transform: scale(1.1);
     }
+
+    &.buttonText {
+        transition-property: transform, color;
+        color: #20d15a;
+
+        &.highlighted {
+            color: yellow;
+        }
+    }
 }
 
 p {

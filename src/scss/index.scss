@@ -46,6 +46,21 @@ div {
             transform: scale(1);
         }
     }
+
+    &.playlistControlsWrapper {
+        width: 75%;
+        height: auto;
+        max-height: 0;
+        overflow-y: hidden;
+
+        transition-property: max-height;
+        transition-duration: 0.75s;
+        transition-timing-function: ease;
+
+        &.shown {
+            max-height: 5vh;
+        }
+    }
 }
 
 img {
