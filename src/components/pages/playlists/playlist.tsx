@@ -19,10 +19,12 @@ import stopImage from '../../../assets/images/buttons/stop.svg';
 import pauseImage from '../../../assets/images/buttons/pause.svg';
 import playImage from '../../../assets/images/buttons/play.svg';
 
+const playQueue = new PlayQueue();
+
+
 export default function Playlist():React.ReactElement {
 
     const location = useLocation();
-    const playQueue = new PlayQueue();
 
     const [userPlaylist, setUserPlaylist] = useState<playlistClass>();
     const [playlistEditPopupHTML, setPlaylistEditPopupHTML] = useState<React.ReactElement>(<></>);
