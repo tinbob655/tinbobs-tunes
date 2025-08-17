@@ -42,21 +42,19 @@ export default class PlayQueue {
     playPause():boolean {
 
         //NOTE: this returns if we are playing or not after playing / pausing
-
         
         if (this.#audioPlayer.paused) {
 
             //audio is paused, play it
             this.#audioPlayer.play();
-            return true;
         }
         else {
 
             //audio is playing, pause it
             this.#audioPlayer.pause();
-            return false;
         };
-    }
+        return !this.#audioPlayer.paused;
+    };
 
     skip():void {
         this.#queuePosition++;
@@ -64,30 +62,39 @@ export default class PlayQueue {
         //check if we have reached the end of the queue
         if (this.#queuePosition > this.#queue.length -1) {
 
-            //the end of the queue has been reached
-            this.#audioPlayer.pause();
-            this.#audioPlayer.currentTime = 0;
-        }
-        else {
-
-            //the end of the queue has not been reached
-            this.#audioPlayer.pause();
-            this.#audioPlayer.src = this.#queue[this.#queuePosition];
-            this.#audioPlayer.currentTime = 0;
-            this.#audioPlayer.play();
+            //the end of the queue has been reached then repeat the playlist
+            this.#queuePosition = 0;
         };
+
+        this.#audioPlayer.pause();
+        this.#audioPlayer.src = this.#queue[this.#queuePosition];
+        this.#audioPlayer.currentTime = 0;
+        this.#audioPlayer.play();
     };
 
     rewind():void {
         
         //need to check if we are going back a track or just restarting the current track
-        if (this.#audioPlayer.currentTime < 2 && this.#queuePosition > 0) {
+        if (this.#audioPlayer.currentTime < 2 && this.#queue.length > 1) {
+
+            //we are going to the previous track
+
+            //check if we are at the beginning of the queue
+            if (this.#queuePosition === 0) {
+
+                //we are at the beginning of the queue, so we the position to the last value in the queue
+                this.#queuePosition  = this.#queue.length -1;
+            }
+            else {
+
+                //we were not at the beginning of the queue so just subtract one like usual
+                this.#queuePosition--;
+            }
 
             //go to the previous track
             this.#audioPlayer.pause();
-            this.#audioPlayer.currentTime = 0;
-            this.#queuePosition--;
             this.#audioPlayer.src = this.#queue[this.#queuePosition];
+            this.#audioPlayer.currentTime = 0;
             this.#audioPlayer.play();
         }
         else {

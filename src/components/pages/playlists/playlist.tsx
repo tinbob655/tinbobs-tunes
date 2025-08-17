@@ -360,7 +360,10 @@ export default function Playlist():React.ReactElement {
                             <td>
 
                                 {/*playlist stop button */}
-                                <button type="button" onClick={() => {playQueue.stop()}}>
+                                <button type="button" onClick={() => {
+                                    playQueue.stop();
+                                    setPlaylistPlaying(false);
+                                }}>
                                     <img src={stopImage} className="playerButtonImage" />
                                 </button>
                             </td>
