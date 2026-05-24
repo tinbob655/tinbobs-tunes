@@ -57,6 +57,30 @@ body {
   }
 }
 
+div.sectionDivider {
+  border: none;
+  height: 1px;
+  margin: 24px 0;
+  background: linear-gradient(
+          to right,
+          transparent,
+          vars.$color-border 20%,
+          vars.$color-border 80%,
+          transparent
+  );
+
+  &.glow {
+    background: linear-gradient(
+            to right,
+            transparent,
+            vars.$color-primary 20%,
+            vars.$color-primary 80%,
+            transparent
+    );
+    box-shadow: 0 0 8px vars.$color-primary-glow;
+  }
+}
+
 button {
   display: inline-flex;
   align-items: center;
