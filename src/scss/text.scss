@@ -13,7 +13,7 @@ h2 {
   font-size: vars.$font-size-md;
   font-weight: vars.$font-weight-medium;
   letter-spacing: 0.02em;
-  color: vars.$color-text-muted;
+  color: vars.$color-primary;
 }
 
 p, span, li {
@@ -23,24 +23,49 @@ p, span, li {
   color: vars.$color-text;
 }
 
+a {
+  font-family: vars.$font-family-base;
+  font-size: vars.$font-size-base;
+  font-weight: vars.$font-weight-medium;
+  color: vars.$color-primary-dim;
+  text-decoration: underline;
+}
+
+
+//deal with text alignment
+$alignmentMargin: 10%;
+
+@mixin alignLeft {
+  text-align: left;
+  transform-origin: left;
+  margin-left: $alignmentMargin;
+  margin-right: unset;
+}
+
+@mixin alignRight {
+  text-align: right;
+  transform-origin: right;
+  margin-right: $alignmentMargin;
+  margin-left: unset;
+}
+
 h1, h2, p, span, li {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 
-  $alignmentMargin: 10%;
   &.alignLeft {
-    text-align: left;
-    margin-left: $alignmentMargin;
-    margin-right: unset;
-    transform-origin: left;
+    @include alignLeft;
   }
   &.alignRight {
-    text-align: right;
-    margin-right: $alignmentMargin;
-    margin-left: unset;
-    transform-origin: right;
+    @include alignRight;
   }
+}
+section.alignLeft > p, section.alignLeft > h2 {
+  @include alignLeft;
+}
+section.alignRight > p, section.alignRight > h2 {
+  @include alignRight;
 }
 
 //paragraphs in buttons or links
