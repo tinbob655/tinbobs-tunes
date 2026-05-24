@@ -1,1 +1,6 @@
 @use './variables' as vars;
+
+//use dedicated stylesheets
+@use './text';
+@use './layout';
+@use './scrollbar';

@@ -1,0 +1,60 @@
+@use './variables' as vars;
+
+h1 {
+  font-family: vars.$font-family-heading;
+  font-size: vars.$font-size-lg;
+  font-weight: vars.$font-weight-bold;
+  letter-spacing: 0.02em;
+  color: vars.$color-text;
+}
+
+h2 {
+  font-family: vars.$font-family-heading;
+  font-size: vars.$font-size-md;
+  font-weight: vars.$font-weight-medium;
+  letter-spacing: 0.02em;
+  color: vars.$color-text-muted;
+}
+
+p, span, li {
+  font-family: vars.$font-family-base;
+  font-size: vars.$font-size-base;
+  font-weight: vars.$font-weight-regular;
+  color: vars.$color-text;
+}
+
+h1, h2, p, span, li {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+  $alignmentMargin: 10%;
+  &.alignLeft {
+    text-align: left;
+    margin-left: $alignmentMargin;
+    margin-right: unset;
+    transform-origin: left;
+  }
+  &.alignRight {
+    text-align: right;
+    margin-right: $alignmentMargin;
+    margin-left: unset;
+    transform-origin: right;
+  }
+}
+
+//paragraphs in buttons or links
+a p, button p {
+  cursor: pointer;
+
+  transition-property: transform;
+  transition: vars.$transition-fast;
+
+  &:active {
+    transform: scale(1.05);
+  }
+}
+
+button p {
+  color: vars.$color-text-on-primary;
+}

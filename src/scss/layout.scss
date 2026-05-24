@@ -1,0 +1,92 @@
+@use './variables' as vars;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: vars.$color-bg;
+  color: vars.$color-text;
+  font-family: vars.$font-family-base;
+  font-size: vars.$font-size-base;
+  font-weight: vars.$font-weight-regular;
+  -webkit-font-smoothing: antialiased;
+
+  //center everything in case the screen is too wide
+  display: flex;
+  justify-content: center;
+}
+
+#root {
+  width: 100%;
+  max-width: vars.$max-width-app;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+#content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.card {
+  background-color: vars.$color-surface;
+  border: 1px solid vars.$color-border;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: vars.$shadow-card;
+  transition: box-shadow vars.$transition-normal,
+  transform vars.$transition-normal;
+
+  &:active {
+    transform: scale(0.98);
+    box-shadow: vars.$shadow-primary;
+  }
+
+  &.accent {
+    border-left: 3px solid vars.$color-primary;
+    box-shadow: vars.$shadow-card, vars.$shadow-primary;
+  }
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color vars.$transition-fast,
+  box-shadow vars.$transition-fast,
+  transform vars.$transition-fast;
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &.icon {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    border-radius: 9999px;
+    cursor: pointer;
+
+    img, svg {
+      display: block;
+    }
+
+    &:active {
+      background-color: vars.$color-primary-glow;
+    }
+  }
+}
