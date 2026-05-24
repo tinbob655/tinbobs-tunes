@@ -1,0 +1,74 @@
+@use '../../../scss/variables' as vars;
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: vars.$max-width-app;
+  z-index: 100;
+  background-color: vars.$color-bg;
+  border-bottom: 1px solid vars.$color-border;
+  padding: 12px 16px;
+}
+
+//three lines burger button
+.burger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: vars.$color-text;
+    border-radius: 2px;
+    transition: transform vars.$transition-normal, opacity vars.$transition-normal;
+  }
+
+  //animations to show the header menu
+  &.open {
+    span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+}
+
+//animate height without knowing height using the grid-rows trick
+nav {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows vars.$transition-normal;
+
+  &.open {
+    grid-template-rows: 1fr;
+  }
+
+  .nav-inner {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 0;
+    transition: padding-top vars.$transition-normal;
+  }
+
+  &.open .nav-inner {
+    padding-top: 8px;
+  }
+
+  a {
+    padding: 12px 8px;
+    text-decoration: none;
+    font-family: vars.$font-family-heading;
+    font-size: vars.$font-size-md;
+    color: vars.$color-text-muted;
+    border-radius: 8px;
+    transition: color vars.$transition-fast, background-color vars.$transition-fast;
+
+    &:active, &.active {
+      color: vars.$color-primary;
+      background-color: vars.$color-primary-glow;
+    }
+  }
+}
