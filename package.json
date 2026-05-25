@@ -6,11 +6,15 @@
   "scripts": {
     "dev": "vite",
     "public-dev": "vite --host",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && npx cap sync",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/android": "^8.3.4",
+    "@capacitor/cli": "^8.3.4",
+    "@capacitor/core": "^8.3.4",
+    "@capgo/native-audio": "^8.4.2",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-router": "^7.15.1"
