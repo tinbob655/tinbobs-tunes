@@ -1,0 +1,6 @@
+@use '../../../scss/variables' as vars;
+
+//the title of a playlist
+div.playlistWrapper > h2 {
+  color: vars.$color-text;
+}
