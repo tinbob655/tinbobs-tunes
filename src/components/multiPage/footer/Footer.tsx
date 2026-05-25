@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../../../assets/images/NR logo.png';
 import './footer.scss';
 
 export default function Footer():React.ReactElement {
@@ -10,7 +9,7 @@ export default function Footer():React.ReactElement {
             <p>
                 App brought to you by <a href={"https://github.com/tinbob655"}>Tinbob655</a>
             </p>
-            <img src={logo} alt={"The NewRinaldi logo"}/>
+            <img src={"/logo.png"} alt={"The NewRinaldi logo"}/>
         </footer>
     )
 }
