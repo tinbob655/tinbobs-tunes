@@ -1,0 +1,38 @@
+@use './variables' as vars;
+
+//make the text box look nice
+input[type="text"] {
+  background-color: vars.$color-surface-2;
+  color: vars.$color-text;
+  outline: none !important;
+  border: 3px solid vars.$color-border;
+  border-radius: 5px;
+
+  display: block;
+  $marginTopBottom: 0.4rem;
+  margin: $marginTopBottom auto;
+  padding: 3px 1em;
+}
+
+//make submit button look nice
+input[type="submit"] {
+  background-color: transparent;
+  outline: none;
+  border: none;
+
+  transition-property: color;
+  transition: vars.$transition-fast;
+  &:active {
+    color: vars.$color-primary-glow;
+  }
+}
+
+//alignment based on sections
+section.alignLeft input {
+  margin-left: 7.5%;
+  margin-right: unset;
+}
+section.alignRight input {
+  margin-left: unset;
+  margin-right: 7.5%;
+}

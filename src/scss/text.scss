@@ -16,7 +16,7 @@ h2 {
   color: vars.$color-primary;
 }
 
-p, span, li {
+p, span, li, input {
   font-family: vars.$font-family-base;
   font-size: vars.$font-size-base;
   font-weight: vars.$font-weight-regular;
@@ -61,10 +61,10 @@ h1, h2, p, span, li {
     @include alignRight;
   }
 }
-section.alignLeft > p, section.alignLeft > h2 {
+section.alignLeft  p, section.alignLeft  h2 {
   @include alignLeft;
 }
-section.alignRight > p, section.alignRight > h2 {
+section.alignRight  p, section.alignRight  h2 {
   @include alignRight;
 }
 
