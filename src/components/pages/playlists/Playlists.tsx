@@ -11,6 +11,7 @@ export default function Playlists():React.ReactElement {
     const {
         playlists,
         createPlaylist,
+        deletePlaylist,
     } = usePlaylistManager();
 
     const newPlaylistRef= useRef<HTMLInputElement>(null);
@@ -28,8 +29,9 @@ export default function Playlists():React.ReactElement {
                 {playlists.length > 0 ? (
                     <React.Fragment>
                         {playlists.map((playlist:Playlist) => {
+                            const last:boolean = playlists.indexOf(playlist) === playlists.length -1;
                             return (
-                                <SinglePlaylist inputPlaylist={playlist} key={playlist.name} />
+                                <SinglePlaylist inputPlaylist={playlist} deletePlaylist={deletePlaylist} key={playlist.name} last={last} />
                             )
                         })}
                     </React.Fragment>
@@ -51,7 +53,15 @@ export default function Playlists():React.ReactElement {
                     <p>
                         Give your new playlist a name:
                     </p>
-                    <input name={"name"} type={"text"} placeholder={"Playlist name..."} required maxLength={20} ref={newPlaylistRef} />
+                    <input
+                        name={"name"}
+                        type={"text"}
+                        placeholder={"Playlist name..."}
+                        required
+                        maxLength={20}
+                        ref={newPlaylistRef}
+                        autoComplete={"off"}
+                    />
                     <input type={"submit"} value={"Submit"} />
                 </form>
             </GenericMarkupSection>

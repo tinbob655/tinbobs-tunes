@@ -1,15 +1,14 @@
 import React from 'react';
 import type {Playlist} from "./playlist";
 import Player from "../../multiPage/player/Player.tsx";
-import {usePlaylistManager} from "./usePlaylistManager.ts";
 
 interface params {
     inputPlaylist: Playlist;
+    deletePlaylist: (name: string) => void;
+    last?:boolean;
 }
 
-export default function SinglePlaylist({inputPlaylist}:params):React.ReactElement {
-
-    const {deletePlaylist} = usePlaylistManager();
+export default function SinglePlaylist({inputPlaylist, deletePlaylist, last}:params):React.ReactElement {
 
     return (
         <div className={"playlistWrapper"}>
@@ -20,6 +19,8 @@ export default function SinglePlaylist({inputPlaylist}:params):React.ReactElemen
                 {inputPlaylist.name}
             </h2>
             <Player tracks={inputPlaylist.tracks} />
+
+            {!last ? <div className={"sectionDivider"} /> : <></>}
         </div>
     )
 }
