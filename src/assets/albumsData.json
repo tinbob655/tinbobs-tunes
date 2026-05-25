@@ -1,7 +1,8 @@
-{
-    "buccaneersAlbum": {
+[
+    {
         "frontendName": "Buccaneers",
         "releaseDate": "01/01/24",
+        "image": "buccaneersAlbum.jpg",
         "tracks": [
             ["manTheCannons.flac", "Man the Cannons"],
             ["landHo.flac", "Land Ho"],
@@ -12,9 +13,10 @@
             ["rum.flac", "Rum!"]
         ]
     },
-    "coldChristmasCrunkersAlbum": {
+    {
         "frontendName": "Cold Christmas Crunkers",
         "releaseDate": "01/12/23",
+        "image": "coldChristmasCrunkersAlbum.jpg",
         "tracks": [
             ["christmasPast.mp3", "Christmas Past"],
             ["christmasPresent.mp3", "Christmas Present"],
@@ -22,9 +24,10 @@
             ["comeFlyWithMeChristmasSpecial.mp3", "Come Fly With Me Christmas Special"]
         ]
     },
-    "hugeGuitarAlbum": {
+    {
         "frontendName": "Huge Guitar",
         "releaseDate": "04/07/23",
+        "image": "hugeGuitarAlbum.jpg",
         "tracks": [
             ["theIronDuke.flac", "The Iron Duke"],
             ["warDrums.flac", "War Drums"],
@@ -35,17 +38,19 @@
             ["readyAimFire.flac", "Ready, Aim, Fire"]
         ]
     },
-    "pipeDownRemasteredAlbum": {
+    {
         "frontendName": "Pipe Down Remastered",
         "releaseDate": "01/05/23",
+        "image": "pipeDownRemasteredAlbum.jpg",
         "tracks": [
             ["takeoffRemastered.flac", "Takeoff Remastered"],
             ["cutItOutRemastered.flac", "Cut it Out Remastered"]
         ]
     },
-    "pipeDownAlbum": {
+    {
         "frontendName": "Pipe Down",
         "releaseDate": "11/04/23",
+        "image": "pipeDownAlbum.jpg",
         "tracks": [
             ["takeoff.flac", "Takeoff"],
             ["cutItOut.flac", "Cut it Out"],
@@ -56,9 +61,10 @@
             ["electromanAdventuresAcoustic.flac", "Electroman Adventures (Acoustic vers)"]
         ]
     },
-    "bigJungleInnitAlbum": {
+    {
         "frontendName": "Big Jungle Innit",
         "releaseDate": "16/01/23",
+        "image": "bigJungleInnitAlbum.jpg",
         "tracks": [
             ["westernAdventures.mp3", "Green Pastures"],
             ["onwardsAndUpwards.mp3", "Onwards and Upwards"],
@@ -69,9 +75,10 @@
             ["sanctuaryInTheGlades.mp3", "Sanctuary in the Glades"]
         ]
     },
-    "animalFarmV2Album": {
+    {
         "frontendName": "Animal Farm (V2)",
         "releaseDate": "26/02/23",
+        "image": "animalFarmV2Album.jpg",
         "tracks": [
             ["onAnimalFarmV2.mp3", "On Animal Farm V2"],
             ["theSevenCommandments.MP3", "The 7 Commandments V2"],
@@ -80,9 +87,10 @@
             ["theBattleOfTheCowshed.MP3", "The Battle of the Cowshed"]
         ]  
     },
-    "scareETunesAlbum": {
+    {
         "frontendName": "Scare-e Tunes",
         "releaseDate": "12/11/22",
+        "image": "scareETunesAlbum.jpg",
         "tracks": [
             ["alwaysWatching.mp3", "Always Watching"],
             ["imGoingToTakeAwayTheSignificantMajorityOfYourRights.mp3", "I'm Going to Take Away the Significant Majority of Your Rights"],
@@ -93,9 +101,10 @@
             ["youResembleATwitchingLobsterInManyWays.mp3", "You Resemble a Twitching Lobster in Many Ways"]
         ]
     },
-    "animalFarmAlbum": {
+    {
         "frontendName": "Animal Farm (V1)",
         "releaseDate": "28/10/22",
+        "image": "animalFarmAlbum.jpg",
         "tracks": [
             ["onAnimalFarm.mp3", "On Animal Farm"],
             ["theWindmillSong.mp3", "The Windmill Song"],
@@ -107,9 +116,10 @@
             ["whyMustICarryTheWorldOnMyShoulders.mp3", "Why Must I Carry the World on My Shoulders"]
         ]
     },
-    "weaselPoppersAlbum": {
+    {
         "frontendName": "Weasel Poppers",
         "releaseDate": "15/10/22",
+        "image": "weaselPoppersAlbum.jpg",
         "tracks": [
             ["twitchingAround.mp3", "Twitching Around"],
             ["8bitHavinAFit.mp3", "8-Bit Havin' A Fit"],
@@ -123,4 +133,4 @@
             ["huntingSomeBounty.mp3", "Hunting Some Bounty"]
         ]
     }
-}
+]
