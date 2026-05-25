@@ -1,6 +1,7 @@
 import React from 'react';
 import type {Playlist} from "./playlist";
 import Player from "../../multiPage/player/Player.tsx";
+import removeIcon from '../../../assets/images/buttons/remove.svg';
 
 interface params {
     inputPlaylist: Playlist;
@@ -13,7 +14,7 @@ export default function SinglePlaylist({inputPlaylist, deletePlaylist, last}:par
     return (
         <div className={"playlistWrapper"}>
             <button className={"playlistDeleteButton"} onClick={() => {deletePlaylist(inputPlaylist.name)}} >
-                X
+                <img src={removeIcon} alt={"Remove icon"}/>
             </button>
             <h2>
                 {inputPlaylist.name}

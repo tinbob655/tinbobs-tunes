@@ -12,12 +12,7 @@ button.playlistDeleteButton {
   width: 28px;
   height: 28px;
   padding: 0;
-  border-radius: 50% !important;
   background-color: transparent;
-  border: 1.5px solid vars.$color-border !important;
-  color: vars.$color-text-muted;
-  font-size: vars.$font-size-sm;
-  line-height: 1;
   transition: background-color vars.$transition-fast,
   border-color vars.$transition-fast,
   color vars.$transition-fast;
