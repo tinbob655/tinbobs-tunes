@@ -83,3 +83,8 @@ a p, button p {
 button p {
   color: vars.$color-text-on-primary;
 }
+
+.error {
+  color: #dc3232;
+  font-weight: vars.$font-weight-bold;
+}

@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import PageHeader from "../../multiPage/PageHeader.tsx";
 import GenericMarkupSection from "../../multiPage/GenericMarkupSection.tsx";
 import SinglePlaylist from "./SinglePlaylist.tsx";
@@ -15,6 +15,8 @@ export default function Playlists():React.ReactElement {
     } = usePlaylistManager();
 
     const newPlaylistRef= useRef<HTMLInputElement>(null);
+
+    const [newPlaylistErrorMessage, setNewPlaylistErrorMessage] = useState<string>('');
 
     return (
         <React.Fragment>
@@ -63,6 +65,9 @@ export default function Playlists():React.ReactElement {
                         autoComplete={"off"}
                     />
                     <input type={"submit"} value={"Submit"} />
+                    <p className={"error"} style={{float: 'right'}}>
+                        {newPlaylistErrorMessage}
+                    </p>
                 </form>
             </GenericMarkupSection>
         </React.Fragment>
@@ -90,6 +95,14 @@ export default function Playlists():React.ReactElement {
             tracks: [],
         };
 
-        createPlaylist(newPlaylist);
+        //fail cleanly
+        try {
+            createPlaylist(newPlaylist);
+            setNewPlaylistErrorMessage('');
+        }
+        catch(e) {
+            setNewPlaylistErrorMessage("Failed to create playlist");
+            console.error(e);
+        }
     }
 }

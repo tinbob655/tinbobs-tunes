@@ -15,7 +15,14 @@ export function usePlaylistManager() {
 
     //functions for export
     function createPlaylist(playlist:Playlist):void {
-        setPlaylists(prev => [playlist, ...prev]);
+
+        //refuse to create playlists with duplicate names
+        if (playlists.some(p => p.name === playlist.name)) {
+
+            //duplicate found
+            throw new Error("Cannot create playlists with duplicate names");
+        }
+        else setPlaylists(prev => [playlist, ...prev]);
     }
 
     function deletePlaylist(name:string) {
