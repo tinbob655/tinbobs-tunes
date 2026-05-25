@@ -47,7 +47,7 @@ export default function Playlists():React.ReactElement {
                 <p>
                     Creating a new playlist is easy, just use the form below:
                 </p>
-                <form onSubmit={createPlaylistFormSubmitted}>
+                <form onSubmit={(event) => {createPlaylistFormSubmitted(event)}}>
                     <p>
                         Give your new playlist a name:
                     </p>
@@ -59,9 +59,10 @@ export default function Playlists():React.ReactElement {
     )
 
     //fires when the user creates a new playlist
-    function createPlaylistFormSubmitted():void {
+    function createPlaylistFormSubmitted(event: React.SubmitEvent<HTMLFormElement>):void {
 
         //make sure input was valid
+        event.preventDefault();
         if (!newPlaylistRef.current) {
             throw new Error("Invalid form submission")
         }
