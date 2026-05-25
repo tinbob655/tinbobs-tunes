@@ -31,7 +31,15 @@ export default function Player({ tracks, initialIndex = 0 }: PlayerProps): React
         seek(Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100)));
     }
 
-    return (
+    //it is possible that there are no tracks to play
+    if (tracks.length === 0) return (
+        <React.Fragment>
+            <p>
+                This playlist is empty!
+            </p>
+        </React.Fragment>
+    )
+    else return (
         <div className="player card">
 
             {/*header and track counter*/}
