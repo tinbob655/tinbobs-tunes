@@ -22,7 +22,7 @@ export default function Albums(): React.ReactElement {
                         <h2 className={alignment}>{album.frontendName}</h2>
                         <p className={alignment}>Released: {album.releaseDate}</p>
                         <Player tracks={tracks} />
-                        <div className={"sectionDivider glow"} />
+                        <div className={"sectionDivider"} />
                     </React.Fragment>
                 );
             })}
