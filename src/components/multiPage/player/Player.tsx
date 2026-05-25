@@ -9,6 +9,7 @@ import pauseButton from '../../../assets/images/buttons/pause.svg';
 import stopButton from '../../../assets/images/buttons/stop.svg';
 import skipButton from '../../../assets/images/buttons/skip.svg';
 import rewindButton from '../../../assets/images/buttons/rewind.svg';
+import {Link} from "react-router";
 
 export default function Player({ tracks, initialIndex = 0 }: PlayerProps): React.ReactElement {
 
@@ -35,7 +36,8 @@ export default function Player({ tracks, initialIndex = 0 }: PlayerProps): React
     if (tracks.length === 0) return (
         <React.Fragment>
             <p>
-                This playlist is empty!
+                This playlist is empty! To add tracks just visit
+                the <Link to={"/albums"}>albums</Link> or <Link to={"/singles"}>singles</Link> pages.
             </p>
         </React.Fragment>
     )
