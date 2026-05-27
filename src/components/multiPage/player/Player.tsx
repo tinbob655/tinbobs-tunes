@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './player.scss';
 import type {PlayerProps, Track} from "./playerTypes";
 import {useAudioPlayer} from "../../../hooks/useAudio.ts";
+import {Link} from "react-router";
+import AddToPlaylistPopup from "../addToPlaylistPopup/AddToPlaylistPopup.tsx";
 
 //import all button images
 import playButton from '../../../assets/images/buttons/play.svg';
@@ -9,7 +11,6 @@ import pauseButton from '../../../assets/images/buttons/pause.svg';
 import stopButton from '../../../assets/images/buttons/stop.svg';
 import skipButton from '../../../assets/images/buttons/skip.svg';
 import rewindButton from '../../../assets/images/buttons/rewind.svg';
-import {Link} from "react-router";
 
 export default function Player({ tracks, initialIndex = 0 }: PlayerProps): React.ReactElement {
 
@@ -22,6 +23,8 @@ export default function Player({ tracks, initialIndex = 0 }: PlayerProps): React
         play, pause, stop, seek,
         selectTrack, next, prev,
     } = useAudioPlayer(tracks, initialIndex);
+
+    const [showAddPopup, setShowAddPopup] = useState<boolean>(false);
 
     const track:Track  = tracks[currentIndex];
     const isFirst:boolean = currentIndex === 0;
@@ -108,6 +111,18 @@ export default function Player({ tracks, initialIndex = 0 }: PlayerProps): React
                     <img src={stopButton} alt={"Stop button"} />
                 </button>
 
+                {/* add to playlist */}
+                <button
+                    className="icon playerBtn"
+                    onClick={(e:React.MouseEvent) => {
+                        e.stopPropagation();
+                        setShowAddPopup(true)
+                    }}
+                    aria-label="Add to playlist"
+                >
+                    <span style={{ fontSize: '20px', color: '#e3e3e3', lineHeight: 1 }}>+</span>
+                </button>
+
                 {/*skip*/}
                 <button
                     className="icon playerBtn"
@@ -140,6 +155,13 @@ export default function Player({ tracks, initialIndex = 0 }: PlayerProps): React
                         </button>
                     ))}
                 </div>
+            )}
+
+            {showAddPopup && (
+                <AddToPlaylistPopup
+                    track={track}
+                    onClose={() => setShowAddPopup(false)}
+                />
             )}
         </div>
     );
