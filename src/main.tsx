@@ -6,17 +6,20 @@ import {BrowserRouter} from "react-router";
 import Header from "./components/multiPage/header/Header.tsx";
 import AllRoutes from "./Routes.tsx";
 import Footer from "./components/multiPage/footer/Footer.tsx";
+import {PlaylistProvider} from "./context/playlistContext.tsx";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
+        <PlaylistProvider>
 
-      <Header/>
+              <Header/>
 
-      <AllRoutes/>
+              <AllRoutes/>
 
-      <Footer/>
+              <Footer/>
 
+        </PlaylistProvider>
     </BrowserRouter>
   </StrictMode>,
 );

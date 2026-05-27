@@ -3,8 +3,8 @@ import PageHeader from "../../multiPage/PageHeader.tsx";
 import GenericMarkupSection from "../../multiPage/GenericMarkupSection.tsx";
 import SinglePlaylist from "./SinglePlaylist.tsx";
 import './playlist.scss';
-import {usePlaylistManager} from "./usePlaylistManager.ts";
 import type {Playlist} from "./playlist";
+import {usePlaylist} from "../../../hooks/usePlaylist.ts";
 
 export default function Playlists():React.ReactElement {
 
@@ -12,7 +12,7 @@ export default function Playlists():React.ReactElement {
         playlists,
         createPlaylist,
         deletePlaylist,
-    } = usePlaylistManager();
+    } = usePlaylist();
 
     const newPlaylistRef= useRef<HTMLInputElement>(null);
 
