@@ -6,4 +6,5 @@ export interface Track {
 export interface PlayerProps {
     tracks: Track[];
     initialIndex?: number;
+    playlistName?: string;
 }

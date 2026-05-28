@@ -19,7 +19,7 @@ export default function SinglePlaylist({inputPlaylist, deletePlaylist, last}:par
             <h2>
                 {inputPlaylist.name}
             </h2>
-            <Player tracks={inputPlaylist.tracks} />
+            <Player tracks={inputPlaylist.tracks} playlistName={inputPlaylist.name} />
 
             {!last ? <div className={"sectionDivider"} /> : <></>}
         </div>

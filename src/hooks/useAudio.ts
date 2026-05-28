@@ -23,59 +23,7 @@ export function useAudioPlayer(tracks: Track[], initialIndex = 0) {
     const indexRef:RefObject<number> = useRef(initialIndex);
     const playingRef:RefObject<boolean> = useRef(false);
     const tracksRef:RefObject<Track[]> = useRef(tracks);
-
-    //keeps refs in sync with state
-    useEffect(() => {
-        indexRef.current  = currentIndex;
-        }, [currentIndex]);
-    useEffect(() => {
-        playingRef.current = isPlaying;
-        }, [isPlaying]);
-    useEffect(() => {
-        tracksRef.current = tracks;
-    }, [tracks]);
-
-    //create our audio element
-    useEffect(() => {
-        const audio = new Audio();
-        audioRef.current = audio;
-
-        //keep the elapsed time in sync
-        audio.addEventListener('timeupdate', () => {
-            setCurrentTime(audio.currentTime);
-        });
-
-        //keep the total time of the track in sync
-        audio.addEventListener('durationchange', () => {
-            setDuration(isFinite(audio.duration) ? audio.duration : 0);
-        });
-
-        //when a track ends, play the next track
-        audio.addEventListener('ended', () => {
-            const nextTrackIndex:number = indexRef.current + 1;
-
-            //if there is another track available
-            if (nextTrackIndex < tracksRef.current.length) {
-                indexRef.current = nextTrackIndex;
-                setCurrentIndex(nextTrackIndex);
-                setCurrentTime(0);
-                audio.src = AUDIO_BASE + tracksRef.current[nextTrackIndex].fileName;
-                audio.play().catch(() => {});
-            }
-
-            //if we reached the end of the Tracks[]
-            else {
-                setIsPlaying(false);
-                playingRef.current = false;
-                setCurrentTime(0);
-            }
-        });
-
-        return () => {
-            audio.pause();
-            audio.src = '';
-        };
-    }, []);
+    const currentFileRef:RefObject<string | null> = useRef<string | null>(null);
 
     //loads a file and optionally starts playing
     const selectTrack:(index:number, play?: boolean) => void = useCallback((index: number, play = true) => {
@@ -92,7 +40,9 @@ export function useAudioPlayer(tracks: Track[], initialIndex = 0) {
 
         //load up the next track
         audio.pause();
-        audio.src = AUDIO_BASE + tracksRef.current[index].fileName;
+        const fileName:string = tracksRef.current[index].fileName;
+        audio.src = AUDIO_BASE + fileName;
+        currentFileRef.current = fileName;
 
         //we also have been told to play the music
         if (play) {
@@ -117,7 +67,9 @@ export function useAudioPlayer(tracks: Track[], initialIndex = 0) {
 
         //if nothing is loaded, then load something
         if (!audio.src || audio.src === window.location.href) {
-            audio.src = AUDIO_BASE + tracksRef.current[indexRef.current].fileName;
+            const fileName:string = tracksRef.current[indexRef.current].fileName;
+            audio.src = AUDIO_BASE + fileName;
+            currentFileRef.current = fileName;
         }
 
         //play the audio
@@ -172,6 +124,92 @@ export function useAudioPlayer(tracks: Track[], initialIndex = 0) {
         if (indexRef.current > 0)
             selectTrack(indexRef.current - 1, playingRef.current);
     }, [selectTrack]);
+
+    //keeps refs in sync with state
+    useEffect(() => {
+        indexRef.current  = currentIndex;
+        }, [currentIndex]);
+    useEffect(() => {
+        playingRef.current = isPlaying;
+        }, [isPlaying]);
+    useEffect(() => {
+        tracksRef.current = tracks;
+    }, [tracks]);
+
+    //when the tracks array changes we need to change the underlying track
+    useEffect(() => {
+
+        //if we have now got no tracks then stop everything
+        if (tracks.length === 0) {
+            stop();
+            currentFileRef.current = null;
+            return;
+        }
+
+        //otherwise, move the track along one
+        const currentFile:string | null = currentFileRef.current;
+        const existingIndex:number = currentFile
+            ? tracks.findIndex(t => t.fileName === currentFile)
+            : -1;
+        const nextIndex:number = existingIndex !== -1
+            ? existingIndex
+            : Math.min(indexRef.current, tracks.length - 1);
+
+        if (nextIndex !== indexRef.current) {
+            indexRef.current = nextIndex;
+            setCurrentIndex(nextIndex);
+        }
+
+        //update the underlying file
+        const nextFile:string = tracks[nextIndex].fileName;
+        if (currentFile !== nextFile) {
+            selectTrack(nextIndex, playingRef.current);
+        }
+    }, [selectTrack, stop, tracks]);
+
+    //create our audio element
+    useEffect(() => {
+        const audio = new Audio();
+        audioRef.current = audio;
+
+        //keep the elapsed time in sync
+        audio.addEventListener('timeupdate', () => {
+            setCurrentTime(audio.currentTime);
+        });
+
+        //keep the total time of the track in sync
+        audio.addEventListener('durationchange', () => {
+            setDuration(isFinite(audio.duration) ? audio.duration : 0);
+        });
+
+        //when a track ends, play the next track
+        audio.addEventListener('ended', () => {
+            const nextTrackIndex:number = indexRef.current + 1;
+
+            //if there is another track available
+            if (nextTrackIndex < tracksRef.current.length) {
+                indexRef.current = nextTrackIndex;
+                setCurrentIndex(nextTrackIndex);
+                setCurrentTime(0);
+                const nextFile:string = tracksRef.current[nextTrackIndex].fileName;
+                audio.src = AUDIO_BASE + nextFile;
+                currentFileRef.current = nextFile;
+                audio.play().catch(() => {});
+            }
+
+            //if we reached the end of the Tracks[]
+            else {
+                setIsPlaying(false);
+                playingRef.current = false;
+                setCurrentTime(0);
+            }
+        });
+
+        return () => {
+            audio.pause();
+            audio.src = '';
+        };
+    }, []);
 
     //exports
     return {

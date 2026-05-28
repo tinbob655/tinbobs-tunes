@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './player.scss';
 import type {PlayerProps, Track} from "./playerTypes";
 import {useAudioPlayer} from "../../../hooks/useAudio.ts";
@@ -11,8 +11,9 @@ import pauseButton from '../../../assets/images/buttons/pause.svg';
 import stopButton from '../../../assets/images/buttons/stop.svg';
 import skipButton from '../../../assets/images/buttons/skip.svg';
 import rewindButton from '../../../assets/images/buttons/rewind.svg';
+import {usePlaylist} from "../../../hooks/usePlaylist.ts";
 
-export default function Player({ tracks, initialIndex = 0 }: PlayerProps): React.ReactElement {
+export default function Player({ tracks, initialIndex = 0, playlistName }: PlayerProps): React.ReactElement {
 
     const {
         currentIndex,
@@ -25,10 +26,19 @@ export default function Player({ tracks, initialIndex = 0 }: PlayerProps): React
     } = useAudioPlayer(tracks, initialIndex);
 
     const [showAddPopup, setShowAddPopup] = useState<boolean>(false);
+    const {removeTrackFromPlaylist} = usePlaylist();
 
-    const track:Track  = tracks[currentIndex];
-    const isFirst:boolean = currentIndex === 0;
-    const isLast:boolean  = currentIndex === tracks.length - 1;
+    //always keep the current track in sync with the current index
+    useEffect(() => {
+        if (tracks.length === 0) {
+            stop();
+            return;
+        }
+
+        if (currentIndex >= tracks.length) {
+            selectTrack(tracks.length - 1, false);
+        }
+    }, [tracks.length, currentIndex, selectTrack, stop]);
 
     function handleProgressClick(e: React.MouseEvent<HTMLDivElement>) {
         const rect:DOMRect = e.currentTarget.getBoundingClientRect();
@@ -43,14 +53,20 @@ export default function Player({ tracks, initialIndex = 0 }: PlayerProps): React
                 the <Link to={"/albums"}>albums</Link> or <Link to={"/singles"}>singles</Link> pages.
             </p>
         </React.Fragment>
-    )
-    else return (
+    );
+
+    const safeIndex:number = Math.min(currentIndex, tracks.length - 1);
+    const track:Track = tracks[safeIndex];
+    const isFirst:boolean = safeIndex === 0;
+    const isLast:boolean  = safeIndex === tracks.length - 1;
+
+    return (
         <div className="player card">
 
             {/*header and track counter*/}
             <div className="playerHeader">
                 <span className="playerNowLabel">♪ NOW PLAYING</span>
-                <span className="playerCounter">{currentIndex + 1} / {tracks.length}</span>
+                <span className="playerCounter">{safeIndex + 1} / {tracks.length}</span>
             </div>
 
             {/*track name*/}
@@ -140,14 +156,25 @@ export default function Player({ tracks, initialIndex = 0 }: PlayerProps): React
                     {tracks.map((t, i) => (
                         <button
                             key={t.fileName}
-                            className={`playerTrackItem${i === currentIndex ? ' active' : ''}`}
+                            className={`playerTrackItem${i === safeIndex ? ' active' : ''}`}
                             onClick={() => selectTrack(i)}
                         >
                             <span className="playerTrackNum">{i + 1}</span>
                             <span className="playerTrackTitle">{t.trackName}</span>
 
+                            {/*show a "remove from playlist" button if we are in a playlist*/}
+                            {playlistName && (
+                                <span
+                                    className={"playerXIcon"}
+                                    onClick={(event: React.MouseEvent<HTMLSpanElement>) => {
+                                        event.stopPropagation();
+                                        removeTrackFromPlaylist(playlistName, t.trackName);
+                                    }}
+                                >✕</span>
+                            )}
+
                             {/*play an animation next to currently playingTrack*/}
-                            {i === currentIndex && isPlaying && (
+                            {i === safeIndex && isPlaying && (
                                 <span className="playerBars" aria-hidden="true">
                                     <span /><span /><span />
                                 </span>
