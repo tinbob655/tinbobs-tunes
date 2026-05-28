@@ -49,15 +49,16 @@ function PlaylistProvider({children}: {children: React.ReactNode}):React.ReactEl
 
     //fires if another component wants to add a track to a playlist
     function addTrackToPlaylist(playlistName: string, track: Track): void {
-        setPlaylists(prev => prev.map(p => {
+
+        //check the playlist name is valid & reject duplicates
+        const target:Playlist|undefined = playlists.find(p => p.name === playlistName);
+        if (target?.tracks.some(t => t.fileName === track.fileName)) {
+            throw new Error('Track already in playlist');
+        }
+
+        //if all good, add the track to the playlist
+        setPlaylists((prev:Playlist[]) => prev.map(p => {
             if (p.name !== playlistName) return p;
-
-            //reject duplicates
-            if (p.tracks.some(t => t.fileName === track.fileName)) {
-                throw new Error('Track already in playlist');
-            }
-
-            //otherwise add the track
             return { ...p, tracks: [...p.tracks, track] };
         }));
     }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import type {Track} from "../player/playerTypes";
+import { createPortal } from 'react-dom';
+import type { Track } from "../player/playerTypes";
 import { usePlaylist } from '../../../hooks/usePlaylist.ts';
 import './addToPlaylistPopup.scss';
 
@@ -13,26 +14,18 @@ export default function AddToPlaylistPopup({ track, onClose }: Params): React.Re
     const { playlists, addTrackToPlaylist } = usePlaylist();
     const [feedback, setFeedback] = useState<{ message: string; ok: boolean } | null>(null);
 
-    //fires when an add happens
-    function handleAdd(event:React.MouseEvent, playlistName: string): void {
-        event.preventDefault();
+    //fires when we attempt to add the track
+    function handleAdd(playlistName: string): void {
         try {
             addTrackToPlaylist(playlistName, track);
             setFeedback({ message: `Added to "${playlistName}"`, ok: true });
-        }
-
-        //do not allow duplicates
-        catch {
+        } catch {
             setFeedback({ message: 'Track already in playlist', ok: false });
         }
     }
 
-    return (
-
-        //tapping anywhere closes the popup
-        <div className="atpBackdrop" onClick={(e) => {e.preventDefault(); onClose()}}>
-
-            {/*stop clicks inside the card from closing it*/}
+    return createPortal(
+        <div className="atpBackdrop" onClick={(e) => { e.stopPropagation(); onClose(); }}>
             <div className="atpCard card" onClick={e => e.stopPropagation()}>
 
                 <div className="atpHeader">
@@ -54,9 +47,7 @@ export default function AddToPlaylistPopup({ track, onClose }: Params): React.Re
                     <ul className="atpList">
                         {playlists.map(pl => (
                             <li key={pl.name}>
-                                <button className="atpPlaylistBtn" onClick={(event) => {
-                                    handleAdd(event, pl.name);
-                                }}>
+                                <button className="atpPlaylistBtn" onClick={() => handleAdd(pl.name)}>
                                     <span className="atpPlaylistName">{pl.name}</span>
                                     <span className="atpPlaylistCount">{pl.tracks.length} tracks</span>
                                 </button>
@@ -65,6 +56,7 @@ export default function AddToPlaylistPopup({ track, onClose }: Params): React.Re
                     </ul>
                 )}
             </div>
-        </div>
+        </div>,
+        document.body  //render the rest of the page outside the popup
     );
 }
