@@ -7,4 +7,5 @@ export interface PlayerProps {
     tracks: Track[];
     initialIndex?: number;
     playlistName?: string;
+    autoLoad?: boolean;
 }

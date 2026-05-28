@@ -12,7 +12,22 @@ function formatTime(secs: number): string {
     return `${m}:${s}`;
 }
 
-export function useAudioPlayer(tracks: Track[], initialIndex = 0) {
+interface exports {
+    currentIndex: number;
+    isPlaying: boolean;
+    progress: number;
+    formattedCurrentTime: string;
+    formattedDuration: string;
+    selectTrack: (index:number, play?: boolean) => void;
+    play: () => void;
+    pause: () => void;
+    stop: () => void;
+    seek: (pct:number) => void;
+    next: () => void;
+    prev: () => void;
+}
+
+export function useAudioPlayer(tracks:Track[], initialIndex = 0):exports {
     const [currentIndex, setCurrentIndex] = useState<number>(initialIndex);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<number>(0);
@@ -41,8 +56,15 @@ export function useAudioPlayer(tracks: Track[], initialIndex = 0) {
         //load up the next track
         audio.pause();
         const fileName:string = tracksRef.current[index].fileName;
-        audio.src = AUDIO_BASE + fileName;
-        currentFileRef.current = fileName;
+        if (play) {
+            audio.src = AUDIO_BASE + fileName;
+            currentFileRef.current = fileName;
+        }
+        else {
+            audio.removeAttribute('src');
+            audio.load();
+            currentFileRef.current = null;
+        }
 
         //we also have been told to play the music
         if (play) {
@@ -163,7 +185,12 @@ export function useAudioPlayer(tracks: Track[], initialIndex = 0) {
         //update the underlying file
         const nextFile:string = tracks[nextIndex].fileName;
         if (currentFile !== nextFile) {
-            selectTrack(nextIndex, playingRef.current);
+            if (playingRef.current) {
+                selectTrack(nextIndex, playingRef.current);
+            }
+            else {
+                currentFileRef.current = null;
+            }
         }
     }, [selectTrack, stop, tracks]);
 
@@ -171,6 +198,7 @@ export function useAudioPlayer(tracks: Track[], initialIndex = 0) {
     useEffect(() => {
         const audio = new Audio();
         audioRef.current = audio;
+        audio.preload = 'none';
 
         //keep the elapsed time in sync
         audio.addEventListener('timeupdate', () => {
