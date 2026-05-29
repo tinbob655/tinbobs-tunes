@@ -1,14 +1,48 @@
 @use '../../../scss/variables' as vars;
 
-//the title of a playlist
-div.playlistWrapper > h2 {
+div.playlistWrapper h2 {
   color: vars.$color-text;
 }
 
+//clickable row containing the title of a playlist
+.playlistTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 4px 0;
+  user-select: none;
+
+  &:active {
+    opacity: 0.75;
+  }
+}
+
+.playlistTitleRowRight {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+//arrow which rotates when playlist is expanded
+.playlistChevron {
+  color: vars.$color-primary;
+  font-size: 1.4rem;
+  line-height: 1;
+
+  transition: transform vars.$transition-normal;
+  transform: rotate(0deg);
+
+  &.open {
+    transform: rotate(90deg);
+  }
+}
+
+//button to delete a playlist
 button.playlistDeleteButton {
-  display: block;
-  margin-left: auto;
-  margin-right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 28px;
   height: 28px;
   padding: 0;

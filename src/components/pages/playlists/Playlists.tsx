@@ -23,28 +23,20 @@ export default function Playlists():React.ReactElement {
             <PageHeader title={"Playlists"} subtitle={"View, create & modify your playlists"} />
 
             {/*user's playlists section*/}
-            <GenericMarkupSection left={false} heading={"Your playlists"}>
-                <p>
-                    Here are all the playlists you have created:
-                </p>
+            {playlists.length > 0 && (
+                <GenericMarkupSection left={false} heading={"Your playlists"}>
+                    <p>
+                        Here are all the playlists you have created:
+                    </p>
 
-                {playlists.length > 0 ? (
-                    <React.Fragment>
-                        {playlists.map((playlist:Playlist) => {
-                            const last:boolean = playlists.indexOf(playlist) === playlists.length -1;
-                            return (
-                                <SinglePlaylist inputPlaylist={playlist} deletePlaylist={deletePlaylist} key={playlist.name} last={last} />
-                            )
-                        })}
-                    </React.Fragment>
-                ) : (
-                    <React.Fragment>
-                        <p style={{fontSize: '13px', fontWeight: 'lighter'}}>
-                            You haven't created any playlists yet!
-                        </p>
-                    </React.Fragment>
-                )}
-            </GenericMarkupSection>
+                    {playlists.map((playlist:Playlist) => {
+                        const last:boolean = playlists.indexOf(playlist) === playlists.length -1;
+                        return (
+                            <SinglePlaylist inputPlaylist={playlist} deletePlaylist={deletePlaylist} key={playlist.name} last={last} />
+                        )
+                    })}
+                </GenericMarkupSection>
+            )}
 
             {/*create new playlist section*/}
             <GenericMarkupSection left={true} heading={"Create a Playlist"} >
