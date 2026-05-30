@@ -1,0 +1,63 @@
+@use '../../../scss/variables' as vars;
+
+//full-screen translucent backdrop
+div.popupWrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: atpFadeIn vars.$transition-fast forwards;
+
+  //wraps the popup itself
+  > .card {
+    width: 100%;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: atpSlideUp vars.$transition-normal forwards;
+
+    //don't want any press-to-shrink behaviour
+    &:active { transform: none !important; }
+
+
+    //the div to wrap the heading of the popup
+    > .heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      //the title itself
+      > h2 {
+        font-family: vars.$font-family-heading;
+        font-size: vars.$font-size-sm;
+        font-weight: vars.$font-weight-bold;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: vars.$color-primary;
+      }
+
+      //the "close popup" button
+      > button.close {
+        font-size: vars.$font-size-sm;
+        color: vars.$color-text-muted;
+        line-height: 1;
+      }
+    }
+  }
+}
+
+//entrance animations
+@keyframes atpFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes atpSlideUp {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}

@@ -1,0 +1,80 @@
+@use './variables' as vars;
+
+//text inputs
+input[type="text"] {
+  display: block;
+  width: calc(100% - 7.5% - 7.5%);
+  background-color: vars.$color-surface-2;
+  color: vars.$color-text;
+  border: 1px solid vars.$color-border;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: vars.$font-family-base;
+  font-size: vars.$font-size-base;
+  outline: none;
+  margin: 0.4rem 0;
+  transition:
+          border-color vars.$transition-fast,
+          box-shadow vars.$transition-fast;
+
+  &::placeholder {
+    color: vars.$color-text-muted;
+  }
+
+  &:hover {
+    border-color: vars.$color-text-muted;
+  }
+
+  &:focus {
+    border-color: vars.$color-primary;
+    box-shadow: 0 0 0 3px vars.$color-primary-glow;
+  }
+}
+
+//submit buttons
+input[type="submit"] {
+  display: inline-block;
+  background-color: vars.$color-primary;
+  color: vars.$color-text-on-primary;
+  border: none;
+  border-radius: 9999px;
+  padding: 10px 28px;
+  font-family: vars.$font-family-heading;
+  font-size: vars.$font-size-sm;
+  font-weight: vars.$font-weight-bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 0.6rem;
+  transition:
+          background-color vars.$transition-fast,
+          box-shadow vars.$transition-fast,
+          transform vars.$transition-fast;
+
+  &:hover {
+    box-shadow: vars.$shadow-primary;
+  }
+
+  &:active {
+    background-color: vars.$color-primary-dim;
+    box-shadow: none;
+    transform: scale(0.97);
+  }
+}
+
+//inputs should be aligned to their sections' alignments
+section.alignLeft {
+  input[type="text"],
+  input[type="submit"] {
+    margin-left: 7.5%;
+    margin-right: unset;
+  }
+}
+
+section.alignRight {
+  input[type="text"],
+  input[type="submit"] {
+    margin-left: unset;
+    margin-right: 7.5%;
+  }
+}

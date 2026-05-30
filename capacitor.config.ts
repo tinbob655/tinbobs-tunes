@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.newrinaldi.site',
+  appId: 'com.tinbobs.tunes',
   appName: "Tinbob's Tunes",
   webDir: 'dist'
 };

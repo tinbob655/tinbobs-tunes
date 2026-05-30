@@ -1,27 +1,25 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './scss/index.scss';
-import './scss/text.scss';
-import './scss/forms.scss';
-import AppRoutes from './routes';
-import { BrowserRouter } from 'react-router-dom';
-import Header from './components/multiPageComponents/header';
-import Footer from './components/multiPageComponents/footer';
+import {BrowserRouter} from "react-router";
+
+import Header from "./components/multiPage/header/Header.tsx";
+import AllRoutes from "./Routes.tsx";
+import Footer from "./components/multiPage/footer/Footer.tsx";
+import {PlaylistProvider} from "./context/playlistContext.tsx";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
+        <PlaylistProvider>
 
-      <header>
-        <Header/>
-      </header>
+              <Header/>
 
-      <AppRoutes/>
+              <AllRoutes/>
 
-      <footer>
-        <Footer/>
-      </footer>
+              <Footer/>
 
+        </PlaylistProvider>
     </BrowserRouter>
   </StrictMode>,
 );

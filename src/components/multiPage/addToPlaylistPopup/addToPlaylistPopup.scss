@@ -1,0 +1,66 @@
+@use '../../../scss/variables' as vars;
+
+.atpTrackName {
+  font-family: vars.$font-family-heading !important;
+  font-size: vars.$font-size-base !important;
+  color: vars.$color-text !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 !important;
+  border-bottom: 1px solid vars.$color-border;
+  padding-bottom: 8px;
+}
+
+.atpFeedback {
+  font-size: vars.$font-size-xs !important;
+  font-weight: vars.$font-weight-medium !important;
+  margin: 0 !important;
+
+  &.ok  { color: vars.$color-primary !important; }
+  &.err { color: #dc3232 !important; }
+}
+
+.atpEmpty {
+  font-size: vars.$font-size-sm !important;
+  color: vars.$color-text-muted !important;
+  margin: 0 !important;
+}
+
+//the scrollable playlist list
+.atpList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+//each playlist row
+.atpPlaylistBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: vars.$color-surface-2;
+  border-radius: 8px;
+  padding: 10px 12px;
+  text-align: left;
+
+  &:active {
+    background: vars.$color-primary-glow;
+    transform: scale(0.98);
+  }
+}
+
+.atpPlaylistName {
+  font-family: vars.$font-family-base;
+  font-size: vars.$font-size-base;
+  color: vars.$color-text;
+}
+
+.atpPlaylistCount {
+  font-size: vars.$font-size-xs;
+  color: vars.$color-text-muted;
+}

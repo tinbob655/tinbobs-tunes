@@ -1,0 +1,12 @@
+@use './variables' as vars;
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: vars.$color-bg;
+}
+::-webkit-scrollbar-thumb {
+  background: vars.$color-border;
+  border-radius: 9999pz;
+}

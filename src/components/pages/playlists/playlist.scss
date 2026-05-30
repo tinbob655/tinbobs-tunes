@@ -1,0 +1,60 @@
+@use '../../../scss/variables' as vars;
+
+div.playlistWrapper h2 {
+  color: vars.$color-text;
+}
+
+//clickable row containing the title of a playlist
+.playlistTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 4px 0;
+  user-select: none;
+
+  &:active {
+    opacity: 0.75;
+  }
+}
+
+.playlistTitleRowRight {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+//arrow which rotates when playlist is expanded
+.playlistChevron {
+  color: vars.$color-primary;
+  font-size: 1.4rem;
+  line-height: 1;
+
+  transition: transform vars.$transition-normal;
+  transform: rotate(0deg);
+
+  &.open {
+    transform: rotate(90deg);
+  }
+}
+
+//button to delete a playlist
+button.playlistDeleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background-color: transparent;
+  transition: background-color vars.$transition-fast,
+  border-color vars.$transition-fast,
+  color vars.$transition-fast;
+
+  &:active {
+    background-color: rgba(220, 50, 50, 0.18);
+    border-color: #dc3232 !important;
+    color: #dc3232;
+    transform: scale(0.95);
+  }
+}

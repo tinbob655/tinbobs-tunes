@@ -1,0 +1,36 @@
+
+//colours
+$color-bg:           #0a0a0a;   // near-black app background
+$color-surface:      #141414;   // card / bottom-sheet surface
+$color-surface-2:    #1e1e1e;   // elevated card / input bg
+$color-border:       #2a2a2a;   // subtle dividers
+$color-primary:      #2edc6e;   // logo green
+$color-primary-dim:  #1a9948;   // darker green for pressed states
+$color-primary-glow: rgba(46, 220, 110, 0.18); // glow / shadow tint
+$color-text:         #e3e3e3;   // primary text  (matches SVG fills)
+$color-text-muted:   #7a7a7a;   // secondary / metadata text
+$color-text-on-primary: #0a0a0a; // text placed on a green button
+
+//fonts
+$font-family-heading: 'Exo 2', system-ui, sans-serif;
+$font-family-base:    'Nunito', system-ui, sans-serif;
+$font-size-xs:       0.70rem;   // timestamps, labels
+$font-size-sm:       0.82rem;   // metadata, captions
+$font-size-base:     1rem;      // body copy
+$font-size-md:       1.15rem;   // track title
+$font-size-lg:       1.35rem;   // section heading
+$font-size-xl:       1.75rem;   // hero / page title
+$font-weight-regular: 400;
+$font-weight-medium:  500;
+$font-weight-bold:    700;
+
+//shadows & glows
+$shadow-card:    0 2px 12px rgba(0, 0, 0, 0.6);
+$shadow-primary: 0 0 16px $color-primary-glow;
+
+//animations
+$transition-fast:   150ms ease;
+$transition-normal: 250ms ease;
+
+//layout
+$max-width-app:  480px;   //cap for mobile devices

@@ -1,0 +1,226 @@
+@use '../../../scss/variables' as vars;
+
+.player {
+  margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &Artwork {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: vars.$shadow-card;
+    margin-bottom: 4px;
+  }
+
+  &Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &NowLabel {
+    font-family: vars.$font-family-heading;
+    font-size: vars.$font-size-xs;
+    font-weight: vars.$font-weight-bold;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: vars.$color-primary;
+    margin-left: 0;
+  }
+
+  &Counter {
+    font-size: vars.$font-size-xs;
+    color: vars.$color-text-muted;
+  }
+
+  &TrackName {
+    font-family: vars.$font-family-heading !important;
+    font-size: vars.$font-size-md !important;
+    font-weight: vars.$font-weight-medium !important;
+    color: vars.$color-text !important;
+    // Prevent long names from breaking layout
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 !important;
+    text-align: left !important;
+  }
+
+  &ProgressBar {
+    padding: 10px 0;
+    margin: -6px 0;
+    cursor: pointer;
+  }
+
+  &ProgressTrack {
+    position: relative;
+    height: 3px;
+    background: vars.$color-border;
+    border-radius: 9999px;
+  }
+
+  &ProgressFill {
+    height: 100%;
+    background: vars.$color-primary;
+    border-radius: 9999px;
+    box-shadow: 0 0 8px vars.$color-primary-glow;
+  }
+
+
+  //dot at the leading edge
+  &ProgressThumb {
+    position: absolute;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 13px;
+    height: 13px;
+    background: vars.$color-primary;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity vars.$transition-fast;
+    box-shadow: vars.$shadow-primary;
+    pointer-events: none; // clicks fall through to the wrapper
+  }
+
+  &ProgressBar:hover &ProgressThumb {
+    opacity: 1;
+  }
+
+  &Time {
+    display: flex;
+    justify-content: space-between;
+    font-size: vars.$font-size-xs;
+    color: vars.$color-text-muted;
+    margin-top: -6px;
+  }
+
+  &Controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  &Btn {
+    color: vars.$color-text;
+
+    //colour is muted if the button is disabled
+    &:disabled {
+      color: vars.$color-border;
+      cursor: not-allowed;
+
+      &:active {
+        transform: none;
+        background: transparent;
+      }
+    }
+  }
+
+  //will be used for just the large play / pause button
+  &BtnPrimary {
+    background-color: vars.$color-primary !important;
+    color: vars.$color-text-on-primary !important;
+    width: 54px;
+    height: 54px;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    box-shadow: vars.$shadow-primary;
+    transition: background-color vars.$transition-fast,
+    box-shadow vars.$transition-fast,
+    transform vars.$transition-fast;
+
+    &:active {
+      background-color: vars.$color-primary-dim !important;
+      box-shadow: none;
+    }
+  }
+
+  //stop button is de-emphasized
+  &BtnStop {
+    color: vars.$color-text-muted;
+  }
+
+  &Tracklist {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 220px;
+    overflow-y: auto;
+    border-top: 1px solid vars.$color-border;
+    padding-top: 8px;
+    margin-top: 2px;
+  }
+
+  &TrackItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 7px 10px;
+    background: transparent;
+    border-radius: 8px;
+    text-align: left;
+    color: vars.$color-text-muted;
+    font-family: vars.$font-family-base;
+    font-size: vars.$font-size-sm;
+
+    &.active {
+      background: vars.$color-primary-glow;
+      color: vars.$color-primary;
+
+      .playerTrackNum {
+        color: vars.$color-primary;
+      }
+    }
+
+    //override the global button scale down on tap
+    &:active {
+      transform: none;
+      background: vars.$color-surface-2;
+    }
+  }
+
+  &TrackNum {
+    font-size: vars.$font-size-xs;
+    color: vars.$color-text-muted;
+    min-width: 16px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  &TrackTitle {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  //animated bars next to the playing track
+  &Bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 14px;
+    flex-shrink: 0;
+
+    span {
+      width: 3px;
+      background: vars.$color-primary;
+      border-radius: 2px;
+      transform-origin: bottom;
+      animation: playerBarBounce 0.7s ease-in-out infinite alternate;
+
+      &:nth-child(1) { height: 5px;  animation-delay: 0s; }
+      &:nth-child(2) { height: 13px; animation-delay: 0.18s; }
+      &:nth-child(3) { height: 8px;  animation-delay: 0.36s; }
+    }
+  }
+}
+
+@keyframes playerBarBounce {
+  from { transform: scaleY(0.3); }
+  to   { transform: scaleY(1); }
+}
