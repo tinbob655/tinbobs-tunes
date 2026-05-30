@@ -6,8 +6,5 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-
-    //host allows for connection on mobile device
-    host: '0.0.0.0',
   }
 })
