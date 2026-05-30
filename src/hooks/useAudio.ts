@@ -1,5 +1,7 @@
 import {useState, useEffect, useRef, useCallback, type RefObject} from 'react';
 import type {Track} from "../components/multiPage/player/playerTypes";
+import {MediaSession, type MediaSessionAction} from "@capgo/capacitor-media-session";
+import toDataUri from "../functions/toDataURI.ts";
 
 //audio files are in public/audio
 const AUDIO_BASE = '/audio/';
@@ -136,27 +138,88 @@ export function useAudioPlayer(tracks:Track[], initialIndex = 0):exports {
 
         //make sure we can actually advance
         if (indexRef.current < tracksRef.current.length - 1)
-            selectTrack(indexRef.current + 1, playingRef.current);
+            selectTrack(indexRef.current + 1);
     }, [selectTrack]);
 
     //rewinds playback
     const prev:() => void = useCallback(() => {
 
         //make sure we can actually rewind
-        if (indexRef.current > 0)
-            selectTrack(indexRef.current - 1, playingRef.current);
+        if (indexRef.current > 0) {
+            selectTrack(indexRef.current - 1);
+        }
     }, [selectTrack]);
 
     //keeps refs in sync with state
     useEffect(() => {
-        indexRef.current  = currentIndex;
+        indexRef.current = currentIndex;
         }, [currentIndex]);
     useEffect(() => {
         playingRef.current = isPlaying;
+
+        //android play/pause in media session
+        void MediaSession.setPlaybackState({
+            playbackState: isPlaying ? 'playing' : 'paused',
+        });
         }, [isPlaying]);
     useEffect(() => {
         tracksRef.current = tracks;
     }, [tracks]);
+
+    //register action handlers
+    useEffect(() => {
+        const actions: [MediaSessionAction, () => void][] = [
+            ['play', play],
+            ['pause', pause],
+            ['stop', stop],
+            ['previoustrack', prev],
+            ['nexttrack', next],
+        ]
+
+        actions.forEach((handlerInfo) => {
+            void MediaSession.setActionHandler({action: handlerInfo[0]}, handlerInfo[1]);
+        });
+
+        void MediaSession.setActionHandler({action: 'seekto'}, (details) => {
+            if (details?.seekTime) {
+                seek((details.seekTime / duration) * 100);
+            }
+        })
+    }, [play, pause, stop, prev, next, seek, duration]);
+
+    //keep android media session's bar in sync
+    useEffect(() => {
+        if (duration === 0) return;
+        void MediaSession.setPositionState({
+            duration,
+            playbackRate: 1,
+            position: Math.min(currentTime, duration),
+        })
+    }, [currentTime, duration]);
+
+    //android session metadata
+    useEffect(() => {
+        if (!isPlaying) return;
+        const track = tracksRef.current[currentIndex];
+        if (!track) return;
+
+        const update = async ():Promise<void> => {
+            const artworkSrc:string|undefined = track.artwork
+                ? await toDataUri(track.artwork)
+                : undefined;
+
+            void MediaSession.setMetadata({
+                title: track.trackName,
+                artist: 'Tinbob',
+                album: "Tinbob's Tunes",
+                artwork: artworkSrc
+                    ? [{ src: artworkSrc, sizes: '512x512', type: 'image/jpeg' }]
+                    : undefined,
+            });
+        };
+
+        void update();
+    }, [currentIndex, isPlaying]);
 
     //when the tracks array changes we need to change the underlying track
     useEffect(() => {
@@ -198,6 +261,7 @@ export function useAudioPlayer(tracks:Track[], initialIndex = 0):exports {
     useEffect(() => {
         const audio = new Audio();
         audioRef.current = audio;
+        audio.volume = 0.4;
         audio.preload = 'none';
 
         //keep the elapsed time in sync

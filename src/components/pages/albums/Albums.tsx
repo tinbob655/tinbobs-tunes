@@ -3,18 +3,24 @@ import PageHeader from "../../multiPage/PageHeader.tsx";
 import rawAlbumData from '../../../assets/albumsData.json' with { type: 'json' };
 import Player from "../../multiPage/player/Player.tsx";
 import type {Track} from "../../multiPage/player/playerTypes";
+import parseDate from "../../../functions/parseDate.ts";
 
 export default function Albums(): React.ReactElement {
     return (
         <React.Fragment>
             <PageHeader title={"Albums"} subtitle={"All my albums to date"} />
-            {rawAlbumData.map((album, index:number):React.ReactElement => {
+            {[...rawAlbumData]
+                .sort((a, b) => {
+                    return parseDate(b.releaseDate) - parseDate(a.releaseDate)
+                })
+                .map((album, index:number):React.ReactElement => {
                 const alignment:string = index % 2 === 0 ? "alignRight" : "alignLeft";
 
                 //mutates json into tracks
                 const tracks: Track[] = album.tracks.map(([fileName, trackName]) => ({
                     fileName: `albums/${album.image.replace('.jpg', '')}/${fileName}`,
                     trackName,
+                    artwork: `${window.location.origin}/images/albumCovers/${album.image}`,
                 }));
 
                 return (
