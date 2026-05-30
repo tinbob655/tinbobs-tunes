@@ -6,6 +6,15 @@
   flex-direction: column;
   gap: 10px;
 
+  &Artwork {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: vars.$shadow-card;
+    margin-bottom: 4px;
+  }
+
   &Header {
     display: flex;
     justify-content: space-between;

@@ -63,6 +63,16 @@ export default function Player({ tracks, initialIndex = 0, playlistName }: Playe
     return (
         <div className="player card">
 
+            {/*artwork*/}
+            {track.artwork && (
+                <img
+                    src={track.artwork}
+                    alt={track.trackName}
+                    className="playerArtwork"
+                    loading={"lazy"}
+                />
+            )}
+
             {/*header and track counter*/}
             <div className="playerHeader">
                 <span className="playerNowLabel">♪ NOW PLAYING</span>
