@@ -9,4 +9,5 @@ export interface PlayerProps {
     initialIndex?: number;
     playlistName?: string;
     autoLoad?: boolean;
+    allowShuffle?: boolean;
 }

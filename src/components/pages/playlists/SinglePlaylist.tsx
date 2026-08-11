@@ -36,7 +36,7 @@ export default function SinglePlaylist({inputPlaylist, deletePlaylist, last}: pa
 
             {/*player — only rendered when expanded*/}
             {expanded && (
-                <Player tracks={inputPlaylist.tracks} playlistName={inputPlaylist.name} />
+                <Player tracks={inputPlaylist.tracks} playlistName={inputPlaylist.name} allowShuffle={true} />
             )}
 
             {!last && <div className={"sectionDivider"} />}

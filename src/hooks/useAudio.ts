@@ -2,6 +2,7 @@ import {useState, useEffect, useRef, useCallback, type RefObject} from 'react';
 import type {Track} from "../components/multiPage/player/playerTypes";
 import {MediaSession, type MediaSessionAction} from "@capgo/capacitor-media-session";
 import toDataUri from "../functions/toDataURI.ts";
+import shuffleArray from "../functions/shuffleArray.ts";
 
 //audio files are in public/audio
 const AUDIO_BASE = '/audio/';
@@ -16,10 +17,12 @@ function formatTime(secs: number): string {
 
 interface exports {
     currentIndex: number;
+    currentTrack: Track | undefined;
     isPlaying: boolean;
     progress: number;
     formattedCurrentTime: string;
     formattedDuration: string;
+
     selectTrack: (index:number, play?: boolean) => void;
     play: () => void;
     pause: () => void;
@@ -27,13 +30,15 @@ interface exports {
     seek: (pct:number) => void;
     next: () => void;
     prev: () => void;
+    shuffle: (enable: boolean) => void;
 }
 
-export function useAudioPlayer(tracks:Track[], initialIndex = 0):exports {
+export function useAudioPlayer(foreignTracks:Track[], initialIndex = 0):exports {
     const [currentIndex, setCurrentIndex] = useState<number>(initialIndex);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [currentTime, setCurrentTime] = useState<number>(0);
     const [duration, setDuration] = useState<number>(0);
+    const [tracks, setTracks] = useState<Track[]>(foreignTracks);
 
     //gives stable access to elements
     const audioRef:RefObject<HTMLAudioElement | null>   = useRef<HTMLAudioElement | null>(null);
@@ -41,6 +46,21 @@ export function useAudioPlayer(tracks:Track[], initialIndex = 0):exports {
     const playingRef:RefObject<boolean> = useRef(false);
     const tracksRef:RefObject<Track[]> = useRef(tracks);
     const currentFileRef:RefObject<string | null> = useRef<string | null>(null);
+
+    function shuffle(enable: boolean): void {
+        const newTracks = enable ? shuffleArray(foreignTracks) : foreignTracks;
+        const currentFile = currentFileRef.current;
+
+        const newIndex: number = currentFile ? newTracks.findIndex(track => track.fileName === currentFile) : indexRef.current;
+
+        tracksRef.current = newTracks;
+        setTracks(newTracks);
+
+        if (newIndex !== -1) {
+            indexRef.current = newIndex;
+            setCurrentIndex(newIndex);
+        }
+    }
 
     //loads a file and optionally starts playing
     const selectTrack:(index:number, play?: boolean) => void = useCallback((index: number, play = true) => {
@@ -146,9 +166,15 @@ export function useAudioPlayer(tracks:Track[], initialIndex = 0):exports {
 
         //make sure we can actually rewind
         if (indexRef.current > 0) {
-            selectTrack(indexRef.current - 1);
+
+            if (currentTime < 5) {
+                selectTrack(indexRef.current - 1);
+            }
+            else {
+                setCurrentTime(0);
+            }
         }
-    }, [selectTrack]);
+    }, [currentTime, selectTrack]);
 
     //keeps refs in sync with state
     useEffect(() => {
@@ -306,11 +332,12 @@ export function useAudioPlayer(tracks:Track[], initialIndex = 0):exports {
     //exports
     return {
         currentIndex,
+        currentTrack: tracks[currentIndex],
         isPlaying,
         progress: duration > 0 ? (currentTime / duration) * 100 : 0,
         formattedCurrentTime: formatTime(currentTime),
         formattedDuration: formatTime(duration),
         play, pause, stop, seek,
-        selectTrack, next, prev,
+        selectTrack, next, prev, shuffle,
     };
 }

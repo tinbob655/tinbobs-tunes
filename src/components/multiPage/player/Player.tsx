@@ -4,6 +4,7 @@ import type {PlayerProps, Track} from "./playerTypes";
 import {useAudioPlayer} from "../../../hooks/useAudio.ts";
 import {Link} from "react-router";
 import AddToPlaylistPopup from "../addToPlaylistPopup/AddToPlaylistPopup.tsx";
+import {usePlaylist} from "../../../hooks/usePlaylist.ts";
 
 //import all button images
 import playButton from '../../../assets/images/buttons/play.svg';
@@ -11,22 +12,25 @@ import pauseButton from '../../../assets/images/buttons/pause.svg';
 import stopButton from '../../../assets/images/buttons/stop.svg';
 import skipButton from '../../../assets/images/buttons/skip.svg';
 import rewindButton from '../../../assets/images/buttons/rewind.svg';
-import {usePlaylist} from "../../../hooks/usePlaylist.ts";
+import shuffleButton from '../../../assets/images/buttons/shuffle.svg';
+import shuffleOnButton from '../../../assets/images/buttons/shuffleOn.svg';
 
-export default function Player({ tracks, initialIndex = 0, playlistName }: PlayerProps): React.ReactElement {
+export default function Player({ tracks, initialIndex = 0, playlistName, allowShuffle = false }: PlayerProps): React.ReactElement {
 
     const {
         currentIndex,
+        currentTrack,
         isPlaying,
         progress,
         formattedCurrentTime,
         formattedDuration,
         play, pause, stop, seek,
-        selectTrack, next, prev,
+        selectTrack, next, prev, shuffle,
     } = useAudioPlayer(tracks, initialIndex);
+    const {removeTrackFromPlaylist} = usePlaylist();
 
     const [showAddPopup, setShowAddPopup] = useState<boolean>(false);
-    const {removeTrackFromPlaylist} = usePlaylist();
+    const [shuffling, setShuffling] = useState<boolean>(false);
 
     //always keep the current track in sync with the current index
     useEffect(() => {
@@ -45,6 +49,14 @@ export default function Player({ tracks, initialIndex = 0, playlistName }: Playe
         seek(Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100)));
     }
 
+    //turn shuffle on/off
+    function toggleShuffle(): void {
+        setShuffling(prev => {
+            shuffle(!prev);
+            return !prev;
+        })
+    }
+
     //it is possible that there are no tracks to play
     if (tracks.length === 0) return (
         <React.Fragment>
@@ -55,8 +67,8 @@ export default function Player({ tracks, initialIndex = 0, playlistName }: Playe
         </React.Fragment>
     );
 
-    const safeIndex:number = Math.min(currentIndex, tracks.length - 1);
-    const track:Track = tracks[safeIndex];
+    const track : Track = currentTrack!;
+    const safeIndex: number = currentIndex;
     const isFirst:boolean = safeIndex === 0;
     const isLast:boolean  = safeIndex === tracks.length - 1;
 
@@ -128,6 +140,20 @@ export default function Player({ tracks, initialIndex = 0, playlistName }: Playe
                     </button>
                 )}
 
+                {/*shuffle*/}
+                {allowShuffle && (
+                    <button
+                        className={"icon playerBtn"}
+                        onClick={toggleShuffle}
+                        aria-label={shuffling ? "Stop shuffling" : "Shuffle"}
+                    >
+                        <img
+                            src={shuffling ? shuffleOnButton : shuffleButton}
+                            alt={shuffling ? "Stop shuffling button" : "Shuffle button"}
+                        />
+                    </button>
+                )}
+
                 {/*stop*/}
                 <button
                     className="icon playerBtn playerBtnStop"
@@ -163,10 +189,12 @@ export default function Player({ tracks, initialIndex = 0, playlistName }: Playe
             {/*track list (only if there is one more than one track)*/}
             {tracks.length > 1 && (
                 <div className="playerTracklist">
-                    {tracks.map((t, i) => (
-                        <button
+                    {tracks.map((t, i) => {
+                        const playingThisTrack: boolean = t.fileName === currentTrack?.fileName;
+
+                       return (<button
                             key={t.fileName}
-                            className={`playerTrackItem${i === safeIndex ? ' active' : ''}`}
+                            className={`playerTrackItem${playingThisTrack ? ' active' : ''}`}
                             onClick={() => selectTrack(i)}
                         >
                             <span className="playerTrackNum">{i + 1}</span>
@@ -184,13 +212,13 @@ export default function Player({ tracks, initialIndex = 0, playlistName }: Playe
                             )}
 
                             {/*play an animation next to currently playingTrack*/}
-                            {i === safeIndex && isPlaying && (
+                            {playingThisTrack && isPlaying && (
                                 <span className="playerBars" aria-hidden="true">
-                                    <span /><span /><span />
+                                    <span/><span/><span/>
                                 </span>
                             )}
-                        </button>
-                    ))}
+                        </button>)
+                    })}
                 </div>
             )}
 
