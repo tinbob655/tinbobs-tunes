@@ -69,7 +69,6 @@ export default function Player({ tracks, initialIndex = 0, playlistName, allowSh
 
     const track : Track = currentTrack!;
     const safeIndex: number = currentIndex;
-    const isFirst:boolean = safeIndex === 0;
     const isLast:boolean  = safeIndex === tracks.length - 1;
 
     return (
@@ -115,7 +114,6 @@ export default function Player({ tracks, initialIndex = 0, playlistName, allowSh
                 <button
                     className="icon playerBtn"
                     onClick={() => prev()}
-                    disabled={isFirst}
                     aria-label="Previous track"
                 >
                     <img src={rewindButton} alt={"Rewind button"} />

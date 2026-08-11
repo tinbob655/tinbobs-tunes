@@ -165,14 +165,12 @@ export function useAudioPlayer(foreignTracks:Track[], initialIndex = 0):exports 
     const prev:() => void = useCallback(() => {
 
         //make sure we can actually rewind
-        if (indexRef.current > 0) {
-
-            if (currentTime < 5) {
-                selectTrack(indexRef.current - 1);
-            }
-            else {
-                setCurrentTime(0);
-            }
+        if (currentTime < 5 && indexRef.current > 0) {
+            selectTrack(indexRef.current - 1);
+        }
+        else {
+            if (audioRef.current) audioRef.current.currentTime = 0;
+            setCurrentTime(0);
         }
     }, [currentTime, selectTrack]);
 
